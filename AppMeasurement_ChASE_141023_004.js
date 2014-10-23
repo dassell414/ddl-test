@@ -136,7 +136,7 @@ if ( digitalData.page.pageInfo.nbs_page_responsive_orientation ) { s.contextData
 //	set variables that will be passed with 'page view'
 wa_view = function() {
 
-if (digitalData != undefined ) {
+if ( digitalData ) {
 
 	//	get 'standard' variables
 	wa_std();
@@ -182,6 +182,7 @@ if (digitalData != undefined ) {
 	if ( digitalData.nbs_app_savings.nbs_sav_application_continuation ) { s.contextData['nbs_app_savings.nbs_sav_application_continuation'];}
 	if ( digitalData.nbs_app_savings.nbs_sav_econtracting_eligible ) { s.contextData['nbs_app_savings.nbs_sav_econtracting_eligible'];}
 }
+
 //	Make the call ...
 s.t();
 
@@ -193,7 +194,7 @@ dprop = '';
 //	set variables that will be passed with 'action' (i.e. link-tracking)
 wa_action = function(evtNm) {
 
-if (digitalData != undefined ) {
+if ( digitalData ) {
 
 //	get 'standard' variables
 wa_std();
