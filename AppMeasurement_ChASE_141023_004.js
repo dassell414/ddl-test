@@ -128,9 +128,13 @@ var dprop;  //  declare variable for processing DDL
 
 //	set variables that will always be passed
 wa_std = function() {
-if ( digitalData.page.pageInfo.pageName ) { s.contextData['page.pageInfo.pageName'];}
-if ( digitalData.page.pageInfo.nbs_page_responsive_state ) { s.contextData['page.pageInfo.nbs_page_responsive_state'];}
-if ( digitalData.page.pageInfo.nbs_page_responsive_orientation ) { s.contextData['page.pageInfo.nbs_page_responsive_orientation'];}
+
+if ( digitalData ) {
+
+	if ( digitalData.page.pageInfo.pageName ) { s.contextData['page.pageInfo.pageName'];}
+	if ( digitalData.page.pageInfo.nbs_page_responsive_state ) { s.contextData['page.pageInfo.nbs_page_responsive_state'];}
+	if ( digitalData.page.pageInfo.nbs_page_responsive_orientation ) { s.contextData['page.pageInfo.nbs_page_responsive_orientation'];}
+	}
 }
 
 //	set variables that will be passed with 'page view'
