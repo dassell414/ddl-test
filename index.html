@@ -25,17 +25,17 @@
     ;
     
     function ddlAction()  {
-      if ( typeof digitalData === 'undefined')  {
-        var digitalData = {};
+      if ( typeof digitalData.nbs_user_input === 'undefined')  {
+        if ( typeof digitalData === 'undefined')  {
+          var digitalData = {};
+        }
         digitalData.nbs_user_input = [];
       }
       evtNm = document.forms['ddlTest'].eventName.value;
+      console.log("eventName argument set to: " + evtNm);
       inpNm = document.forms['ddlTest'].inputValue.value;
-      try { digitalData.nbs_user_input.unshift({nbs_input_name:inpNm}); }
-      catch(e)  {
-        digitalData.nbs_user_input = [];
-        digitalData.nbs_user_input.unshift({nbs_input_name:inpNm});
-      }
+      console.log("nbs_input_name value set to: " + inpNm);
+      digitalData.nbs_user_input.unshift({nbs_input_name:inpNm});
       wa_action(evtNm);
     }
   </script>
