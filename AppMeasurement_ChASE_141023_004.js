@@ -202,7 +202,7 @@ var wa_view = function() {
 	logJson();
 	
 	//  ... and reset everything
-	s.contextData = '';
+	s.contextData = {};
 	dprop = '';
 }
 
@@ -258,7 +258,7 @@ var wa_action = function(evtNm) {
 	logJson();
 	
 	//  ... and reset everything
-	s.contextData = '';
+	s.contextData = {};
 	dprop = '';
 }
 
