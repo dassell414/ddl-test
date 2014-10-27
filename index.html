@@ -34,7 +34,7 @@
       try { digitalData.nbs_user_input.unshift({nbs_input_name:inpNm}); }
       catch(e)  {
         digitalData.nbs_user_input = [];
-        digitalData.nbs_user_input[0].nbs_input_name = inpNm;
+        digitalData.nbs_user_input.unshift({nbs_input_name:inpNm});
       }
       wa_action(evtNm);
     }
