@@ -34,6 +34,19 @@
       console.log("nbs_input_name value set to: " + inpNm);
       digitalData.nbs_user_input.unshift({nbs_input_name:inpNm});
       console.log(digitalData);
+      var cNm = "";
+      var cNms = new Array();
+      var cInd = 0;
+      for (var c in s.contextData) { cNms[cNms.length] = c; }
+      cInd = cNms.length;
+      if (cInd > 0) {
+        for (nm in cNms) {
+          cNm += "contextData." + cNms[nm];
+          cNm += ((nm < cInd) ? "," : "");
+          console.log("For nm = " + nm + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
+        }
+      }
+      console.log(cNm);
       wa_action(evtNm);
     }
   </script>
