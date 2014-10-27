@@ -212,17 +212,17 @@ var wa_action = function(evtNm) {
 		//	get 'standard' variables
 		wa_std();
 		
-		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
-		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
-		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
-		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
-		dprop = digitalData.nbs_document_viewed;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_document_viewed_' + dind] = dprop[dind]; } }
-		dprop = digitalData.nbs_document_viewed;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_document_viewed_' + dind] = dprop[dind]; } }
-		dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_system_response_' + dind] = dprop[dind]; } }
-		dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_system_response_' + dind] = dprop[dind]; } }
-		dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_system_response_' + dind] = dprop[dind]; } }
-		dprop = digitalData.nbs_element_interaction;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_element_interaction_' + dind] = dprop[dind]; } }
-		dprop = digitalData.nbs_element_interaction;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_element_interaction_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind].nbs_input_name ) { s.contextData['nbs_user_input_' + dind + '.nbs_input_name'] = dprop[dind].nbs_input_name; } }
+		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind].nbs_input_validation_status ) { s.contextData['nbs_user_input_' + dind + '.nbs_input_validation_status'] = dprop[dind].nbs_input_validation_status; } }
+		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind].nbs_input_validation_message ) { s.contextData['nbs_user_input_' + dind + '.nbs_input_validation_message'] = dprop[dind].nbs_input_validation_message; } }
+		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind].nbs_input_value ) { s.contextData['nbs_user_input_' + dind + '.nbs_input_value'] = dprop[dind].nbs_input_value; } }
+		dprop = digitalData.nbs_document_viewed;  for (dind in dprop) { if ( dprop[dind].nbs_document_name ) { s.contextData['nbs_document_viewed_' + dind + '.nbs_document_name'] = dprop[dind].nbs_document_name; } }
+		dprop = digitalData.nbs_document_viewed;  for (dind in dprop) { if ( dprop[dind].nbs_document_type ) { s.contextData['nbs_document_viewed_' + dind + '.nbs_document_type'] = dprop[dind].nbs_document_type; } }
+		dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind].nbs_system_response_name ) { s.contextData['nbs_system_response_' + dind + '.nbs_system_response_name'] = dprop[dind].nbs_system_response_name; } }
+		dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind].nbs_system_response_text ) { s.contextData['nbs_system_response_' + dind + '.nbs_system_response_text'] = dprop[dind].nbs_system_response_text; } }
+		dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind].nbs_system_response_type ) { s.contextData['nbs_system_response_' + dind + '.nbs_system_response_type'] = dprop[dind].nbs_system_response_type; } }
+		dprop = digitalData.nbs_element_interaction;  for (dind in dprop) { if ( dprop[dind].nbs_interaction_type ) { s.contextData['nbs_element_interaction_' + dind + '.nbs_interaction_type'] = dprop[dind].nbs_interaction_type; } }
+		dprop = digitalData.nbs_element_interaction;  for (dind in dprop) { if ( dprop[dind].nbs_interaction_label ) { s.contextData['nbs_element_interaction_' + dind + '.nbs_interaction_label'] = dprop[dind].nbs_interaction_label; } }
 	}
 	
 	//	Make the call ...
