@@ -129,75 +129,71 @@ var dprop;  //  declare variable for processing DDL
 //	set variables that will always be passed
 function wa_std() {
 
-if ( typeof digitalData != 'undefined' ) {
-
-	if ( digitalData.page.pageInfo.pageName ) { s.contextData['page.pageInfo.pageName'];}
-	if ( digitalData.page.pageInfo.nbs_page_responsive_state ) { s.contextData['page.pageInfo.nbs_page_responsive_state'];}
-	if ( digitalData.page.pageInfo.nbs_page_responsive_orientation ) { s.contextData['page.pageInfo.nbs_page_responsive_orientation'];}
+	if ( typeof digitalData != 'undefined' ) {
+		if ( digitalData.page.pageInfo.pageName ) { s.contextData['page.pageInfo.pageName'];}
+		if ( digitalData.page.pageInfo.nbs_page_responsive_state ) { s.contextData['page.pageInfo.nbs_page_responsive_state'];}
+		if ( digitalData.page.pageInfo.nbs_page_responsive_orientation ) { s.contextData['page.pageInfo.nbs_page_responsive_orientation'];}
 	}
 }
 
 //	set variables that will be passed with 'page view'
 function wa_view() {
-
-if ( typeof digitalData != 'undefined'  ) {
-
-	//	get 'standard' variables
-	wa_std();
-
-	if ( digitalData.page.category.primaryCategory ) { s.contextData['page.category.primaryCategory'];}
-	if ( digitalData.page.category.nbs_sub_category_1 ) { s.contextData['page.category.nbs_sub_category_1'];}
-	if ( digitalData.page.category.nbs_sub_category_2 ) { s.contextData['page.category.nbs_sub_category_2'];}
-	if ( digitalData.page.category.nbs_sub_category_3 ) { s.contextData['page.category.nbs_sub_category_3'];}
-	if ( digitalData.nbs_application_module.nbs_resumed_application_flag ) { s.contextData['nbs_application_module.nbs_resumed_application_flag'];}
-	if ( digitalData.nbs_application_module.nbs_resumed_application_initial_page ) { s.contextData['nbs_application_module.nbs_resumed_application_initial_page'];}
-	if ( digitalData.nbs_application_module.nbs_resumed_application_last_save_date ) { s.contextData['nbs_application_module.nbs_resumed_application_last_save_date'];}
-	dprop = digitalData.nbs_error_user;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_user_' + dind] = dprop[dind]; } }
-	dprop = digitalData.nbs_error_user;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_user_' + dind] = dprop[dind]; } }
-	dprop = digitalData.nbs_error_system;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_system_' + dind] = dprop[dind]; } }
-	dprop = digitalData.nbs_error_system;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_system_' + dind] = dprop[dind]; } }
-	dprop = digitalData.nbs_error_business;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_business_' + dind] = dprop[dind]; } }
-	dprop = digitalData.nbs_error_business;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_business_' + dind] = dprop[dind]; } }
-	if ( digitalData.nbs_product.nbs_product_type ) { s.contextData['nbs_product.nbs_product_type'];}
-	if ( digitalData.nbs_product_savings.nbs_sav_name ) { s.contextData['nbs_product_savings.nbs_sav_name'];}
-	if ( digitalData.nbs_product_savings.nbs_sav_offer ) { s.contextData['nbs_product_savings.nbs_sav_offer'];}
-	if ( digitalData.nbs_product_savings.nbs_sav_offer_bonusrate ) { s.contextData['nbs_product_savings.nbs_sav_offer_bonusrate'];}
-	if ( digitalData.nbs_product_savings.nbs_sav_offer_withdrawals ) { s.contextData['nbs_product_savings.nbs_sav_offer_withdrawals'];}
-	if ( digitalData.nbs_product_savings.nbs_sav_fee_annual ) { s.contextData['nbs_product_savings.nbs_sav_fee_annual'];}
-	if ( digitalData.nbs_product_savings.nbs_sav_fee_monthly ) { s.contextData['nbs_product_savings.nbs_sav_fee_monthly'];}
-	if ( digitalData.nbs_user.nbs_user_customer_number ) { s.contextData['nbs_user.nbs_user_customer_number'];}
-	if ( digitalData.nbs_user.nbs_user_customer_status ) { s.contextData['nbs_user.nbs_user_customer_status'];}
-	if ( digitalData.nbs_user.nbs_user_address_type ) { s.contextData['nbs_user.nbs_user_address_type'];}
-	if ( digitalData.nbs_user.nbs_user_postcode ) { s.contextData['nbs_user.nbs_user_postcode'];}
-	if ( digitalData.nbs_user.nbs_user_bfpo_number ) { s.contextData['nbs_user.nbs_user_bfpo_number'];}
-	if ( digitalData.nbs_user.nbs_user_gender ) { s.contextData['nbs_user.nbs_user_gender'];}
-	if ( digitalData.nbs_user.nbs_user_dateofbirth ) { s.contextData['nbs_user.nbs_user_dateofbirth'];}
-	if ( digitalData.nbs_user.nbs_user_city ) { s.contextData['nbs_user.nbs_user_city'];}
-	if ( digitalData.nbs_user.nbs_user_income ) { s.contextData['nbs_user.nbs_user_income'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_application_product_type ) { s.contextData['nbs_app_savings.nbs_sav_application_product_type'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_application_type ) { s.contextData['nbs_app_savings.nbs_sav_application_type'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_application_route ) { s.contextData['nbs_app_savings.nbs_sav_application_route'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_application_id ) { s.contextData['nbs_app_savings.nbs_sav_application_id'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_application_starting_date ) { s.contextData['nbs_app_savings.nbs_sav_application_starting_date'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_initial_deposit_selected ) { s.contextData['nbs_app_savings.nbs_sav_initial_deposit_selected'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_initial_deposit_amt ) { s.contextData['nbs_app_savings.nbs_sav_initial_deposit_amt'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_initial_deposit_bank ) { s.contextData['nbs_app_savings.nbs_sav_initial_deposit_bank'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_paperless_selected ) { s.contextData['nbs_app_savings.nbs_sav_paperless_selected'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_application_continuation ) { s.contextData['nbs_app_savings.nbs_sav_application_continuation'];}
-	if ( digitalData.nbs_app_savings.nbs_sav_econtracting_eligible ) { s.contextData['nbs_app_savings.nbs_sav_econtracting_eligible'];}
-}
-
-//	Make the call ...
-s.t();
-
-//  ... and reset everything
-s.contextData = '';
-dprop = '';
+	if ( typeof digitalData != 'undefined'  ) {
+		//	get 'standard' variables
+		wa_std();
+	
+		if ( digitalData.page.category.primaryCategory ) { s.contextData['page.category.primaryCategory'];}
+		if ( digitalData.page.category.nbs_sub_category_1 ) { s.contextData['page.category.nbs_sub_category_1'];}
+		if ( digitalData.page.category.nbs_sub_category_2 ) { s.contextData['page.category.nbs_sub_category_2'];}
+		if ( digitalData.page.category.nbs_sub_category_3 ) { s.contextData['page.category.nbs_sub_category_3'];}
+		if ( digitalData.nbs_application_module.nbs_resumed_application_flag ) { s.contextData['nbs_application_module.nbs_resumed_application_flag'];}
+		if ( digitalData.nbs_application_module.nbs_resumed_application_initial_page ) { s.contextData['nbs_application_module.nbs_resumed_application_initial_page'];}
+		if ( digitalData.nbs_application_module.nbs_resumed_application_last_save_date ) { s.contextData['nbs_application_module.nbs_resumed_application_last_save_date'];}
+		dprop = digitalData.nbs_error_user;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_user_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_error_user;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_user_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_error_system;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_system_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_error_system;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_system_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_error_business;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_business_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_error_business;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_error_business_' + dind] = dprop[dind]; } }
+		if ( digitalData.nbs_product.nbs_product_type ) { s.contextData['nbs_product.nbs_product_type'];}
+		if ( digitalData.nbs_product_savings.nbs_sav_name ) { s.contextData['nbs_product_savings.nbs_sav_name'];}
+		if ( digitalData.nbs_product_savings.nbs_sav_offer ) { s.contextData['nbs_product_savings.nbs_sav_offer'];}
+		if ( digitalData.nbs_product_savings.nbs_sav_offer_bonusrate ) { s.contextData['nbs_product_savings.nbs_sav_offer_bonusrate'];}
+		if ( digitalData.nbs_product_savings.nbs_sav_offer_withdrawals ) { s.contextData['nbs_product_savings.nbs_sav_offer_withdrawals'];}
+		if ( digitalData.nbs_product_savings.nbs_sav_fee_annual ) { s.contextData['nbs_product_savings.nbs_sav_fee_annual'];}
+		if ( digitalData.nbs_product_savings.nbs_sav_fee_monthly ) { s.contextData['nbs_product_savings.nbs_sav_fee_monthly'];}
+		if ( digitalData.nbs_user.nbs_user_customer_number ) { s.contextData['nbs_user.nbs_user_customer_number'];}
+		if ( digitalData.nbs_user.nbs_user_customer_status ) { s.contextData['nbs_user.nbs_user_customer_status'];}
+		if ( digitalData.nbs_user.nbs_user_address_type ) { s.contextData['nbs_user.nbs_user_address_type'];}
+		if ( digitalData.nbs_user.nbs_user_postcode ) { s.contextData['nbs_user.nbs_user_postcode'];}
+		if ( digitalData.nbs_user.nbs_user_bfpo_number ) { s.contextData['nbs_user.nbs_user_bfpo_number'];}
+		if ( digitalData.nbs_user.nbs_user_gender ) { s.contextData['nbs_user.nbs_user_gender'];}
+		if ( digitalData.nbs_user.nbs_user_dateofbirth ) { s.contextData['nbs_user.nbs_user_dateofbirth'];}
+		if ( digitalData.nbs_user.nbs_user_city ) { s.contextData['nbs_user.nbs_user_city'];}
+		if ( digitalData.nbs_user.nbs_user_income ) { s.contextData['nbs_user.nbs_user_income'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_application_product_type ) { s.contextData['nbs_app_savings.nbs_sav_application_product_type'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_application_type ) { s.contextData['nbs_app_savings.nbs_sav_application_type'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_application_route ) { s.contextData['nbs_app_savings.nbs_sav_application_route'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_application_id ) { s.contextData['nbs_app_savings.nbs_sav_application_id'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_application_starting_date ) { s.contextData['nbs_app_savings.nbs_sav_application_starting_date'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_initial_deposit_selected ) { s.contextData['nbs_app_savings.nbs_sav_initial_deposit_selected'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_initial_deposit_amt ) { s.contextData['nbs_app_savings.nbs_sav_initial_deposit_amt'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_initial_deposit_bank ) { s.contextData['nbs_app_savings.nbs_sav_initial_deposit_bank'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_paperless_selected ) { s.contextData['nbs_app_savings.nbs_sav_paperless_selected'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_application_continuation ) { s.contextData['nbs_app_savings.nbs_sav_application_continuation'];}
+		if ( digitalData.nbs_app_savings.nbs_sav_econtracting_eligible ) { s.contextData['nbs_app_savings.nbs_sav_econtracting_eligible'];}
+	}
+	
+	//	Make the call ...
+	s.t();
+	
+	//  ... and reset everything
+	s.contextData = '';
+	dprop = '';
 }
 
 //	set variables that will be passed with 'action' (i.e. link-tracking)
 function wa_action(evtNm) {
-
 	if ( typeof digitalData != 'undefined'  ) {
 		//	get 'standard' variables
 		wa_std();
