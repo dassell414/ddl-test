@@ -129,7 +129,7 @@ var dprop;  //  declare variable for processing DDL
 //	set variables that will always be passed
 var wa_std = function() {
 
-	if ( typeof digitalData != 'undefined' ) {
+	if ( typeof (digitalData) != 'undefined' ) {
 		if ( digitalData.page.pageInfo.pageName ) { s.contextData['page.pageInfo.pageName'];}
 		if ( digitalData.page.pageInfo.nbs_page_responsive_state ) { s.contextData['page.pageInfo.nbs_page_responsive_state'];}
 		if ( digitalData.page.pageInfo.nbs_page_responsive_orientation ) { s.contextData['page.pageInfo.nbs_page_responsive_orientation'];}
@@ -138,7 +138,7 @@ var wa_std = function() {
 
 //	set variables that will be passed with 'page view'
 var wa_view = function() {
-	if ( typeof digitalData != 'undefined'  ) {
+	if ( typeof (digitalData) != 'undefined'  ) {
 		//	get 'standard' variables
 		wa_std();
 	
@@ -194,7 +194,7 @@ var wa_view = function() {
 
 //	set variables that will be passed with 'action' (i.e. link-tracking)
 var wa_action = function(evtNm) {
-	if ( typeof digitalData != 'undefined'  ) {
+	if ( typeof (digitalData) != 'undefined'  ) {
 		//	get 'standard' variables
 		wa_std();
 		
