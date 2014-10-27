@@ -240,7 +240,7 @@ var wa_action = function(evtNm) {
 		for (nm in cNms) {
 			cNm += "contextData." + cNms[nm];
 			cNm += (((nm + 1) < cInd) ? "," : "");
-			console.log("For nm = " + nm + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
+			console.log("Now nm = " + nm + ", nm + 1 = " + (nm + 1) + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
 		}
 	}
 	console.log("cNm is now set to: " +cNm);
