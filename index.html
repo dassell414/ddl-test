@@ -31,7 +31,7 @@
       }
       evtNm = document.forms['ddlTest'].eventName.value;
       inpNm = document.forms['ddlTest'].inputValue.value;
-      try { digitalData.nbs_user_input[0].unshift = {nbs_input_name:inpNm}; }
+      try { digitalData.nbs_user_input.unshift({nbs_input_name:inpNm}); }
       catch(e)  {
         digitalData.nbs_user_input = [];
         digitalData.nbs_user_input[0].nbs_input_name = inpNm;
