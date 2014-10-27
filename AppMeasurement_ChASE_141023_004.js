@@ -230,9 +230,11 @@ var wa_action = function(evtNm) {
 	var cNm = "";
 	var cNms = new Array();
 	var cInd = 0;
+	console.log("About to check CDVs: " + '\n' + s.contextData);
 	for (var c in s.contextData) { 
 		cNms[cNms.length] = c;
 	}
+	console.log("cNms is: " + cNms);
 	cInd = cNms.length;
 	if (cInd > 0) {
 		for (nm in cNms) {
