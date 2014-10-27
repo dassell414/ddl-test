@@ -25,10 +25,10 @@
     ;
     
     function ddlAction()  {
+      if ( typeof digitalData === 'undefined')  {
+        var digitalData = {};
+      }
       if ( typeof digitalData.nbs_user_input === 'undefined')  {
-        if ( typeof digitalData === 'undefined')  {
-          var digitalData = {};
-        }
         digitalData.nbs_user_input = [];
       }
       evtNm = document.forms['ddlTest'].eventName.value;
