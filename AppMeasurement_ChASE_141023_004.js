@@ -241,7 +241,8 @@ var logJson = function(data)	{
 	try	{
 		console.log(data);
 	}	catch(e)	{
-		msg = "Error printing DDL to Developer Console: " + + "\n\t" e + "\n\n" + "Activate 'Console' or Developer Tools." + "\n\n"
+		msg = "Error printing DDL to Developer Console: " + "\n\t" + e + "\n\n" + "Activate 'Console' or Developer Tools." + "\n\n" + data;
+		alert(msg);
 	}
 }
 
