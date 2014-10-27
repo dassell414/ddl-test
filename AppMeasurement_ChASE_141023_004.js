@@ -127,7 +127,7 @@ s.doPlugins=s.s_doPlugins;
 var dprop;  //  declare variable for processing DDL
 
 //	set variables that will always be passed
-wa_std = function() {
+function wa_std() {
 
 if ( typeof digitalData != 'undefined' ) {
 
@@ -138,7 +138,7 @@ if ( typeof digitalData != 'undefined' ) {
 }
 
 //	set variables that will be passed with 'page view'
-wa_view = function() {
+function wa_view() {
 
 if ( typeof digitalData != 'undefined'  ) {
 
@@ -196,32 +196,31 @@ dprop = '';
 }
 
 //	set variables that will be passed with 'action' (i.e. link-tracking)
-wa_action = function(evtNm) {
+function wa_action(evtNm) {
 
-if ( typeof digitalData != 'undefined'  ) {
-
-//	get 'standard' variables
-wa_std();
-
-dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
-dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
-dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
-dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
-dprop = digitalData.nbs_document_viewed;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_document_viewed_' + dind] = dprop[dind]; } }
-dprop = digitalData.nbs_document_viewed;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_document_viewed_' + dind] = dprop[dind]; } }
-dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_system_response_' + dind] = dprop[dind]; } }
-dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_system_response_' + dind] = dprop[dind]; } }
-dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_system_response_' + dind] = dprop[dind]; } }
-dprop = digitalData.nbs_element_interaction;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_element_interaction_' + dind] = dprop[dind]; } }
-dprop = digitalData.nbs_element_interaction;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_element_interaction_' + dind] = dprop[dind]; } }
-}
-
-//	Make the call ...
-s.tl(true, 'o', evtNm);
-
-//  ... and reset everything
-s.contextData = '';
-dprop = '';
+	if ( typeof digitalData != 'undefined'  ) {
+		//	get 'standard' variables
+		wa_std();
+		
+		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_user_input;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_user_input_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_document_viewed;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_document_viewed_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_document_viewed;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_document_viewed_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_system_response_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_system_response_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_system_response;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_system_response_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_element_interaction;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_element_interaction_' + dind] = dprop[dind]; } }
+		dprop = digitalData.nbs_element_interaction;  for (dind in dprop) { if ( dprop[dind] ) { s.contextData['nbs_element_interaction_' + dind] = dprop[dind]; } }
+	}
+	
+	//	Make the call ...
+	s.tl(true, 'o', evtNm);
+	
+	//  ... and reset everything
+	s.contextData = '';
+	dprop = '';
 }
 
 /* References to plugins here */
