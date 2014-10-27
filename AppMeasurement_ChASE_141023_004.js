@@ -188,7 +188,12 @@ var wa_view = function() {
 	s.t();
 
 	//	... dump to Console for validation ...
-	alert(JSON.stringify(s.contextData));
+	try{ 
+		console.log(JSON.stringify(s.contextData, null, '\t')); 
+	} catch(e) { 
+		msg = "Error showing DDL: " + e + "\n" + "Activate console or developer tools." + "\n" + JSON.stringify(s.contextData, null, '\t'));
+		alert(msg);
+	}
 	
 	//  ... and reset everything
 //	s.contextData = '';
