@@ -241,7 +241,7 @@ var wa_action = function(evtNm) {
 		for (nm in cNms) {
 			cInd--;
 			cNm += "contextData." + cNms[nm];
-			cNm += ( ( cInd > 1 ) ? "," : "");
+			cNm += ( ( cInd > 0 ) ? "," : "");
 			console.log("Now nm = " + nm + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
 		}
 	}
