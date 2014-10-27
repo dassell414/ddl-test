@@ -27,10 +27,15 @@
     function ddlAction()  {
       if ( typeof digitalData === 'undefined')  {
         var digitalData = {};
+        digitalData.nbs_user_input = [];
       }
       evtNm = document.forms['ddlTest'].eventName.value;
       inpNm = document.forms['ddlTest'].inputValue.value;
-      digitalData.nbs_user_input[0].nbs_input_name = inpNm;
+      try { digitalData.nbs_user_input[0].unshift = {nbs_input_name:inpNm}; }
+      catch(e)  {
+        digitalData.nbs_user_input = [];
+        digitalData.nbs_user_input[0].nbs_input_name = inpNm;
+      }
       wa_action(evtNm);
     }
   </script>
