@@ -130,7 +130,7 @@ var dprop;  //  declare variable for processing DDL
 var wa_std = function() {
 
 	if ( typeof (digitalData) != 'undefined' ) {
-		if ( digitalData.page.pageInfo.pageName ) { s.contextData['page.pageInfo.pageName'];}
+		if ( typeof digitalData.page.pageInfo.pageName != 'undefined' ) { s.contextData['page.pageInfo.pageName'];}
 		if ( digitalData.page.pageInfo.nbs_page_responsive_state ) { s.contextData['page.pageInfo.nbs_page_responsive_state'];}
 		if ( digitalData.page.pageInfo.nbs_page_responsive_orientation ) { s.contextData['page.pageInfo.nbs_page_responsive_orientation'];}
 	}
