@@ -238,9 +238,9 @@ var wa_action = function(evtNm) {
 
 var logJson = function()	{
 	obj = JSON.stringify(s.contextData, null, '\t');
-	msg = "Log of DDL (parsed): " + obj;
+	msg = "Log of DDL (parsed): " + "\n" + obj;
 	try	{
-		console.log(obj);
+		console.log(msg);
 	}	catch(e)	{
 		msg = "Error printing DDL to Developer Console: " + "\n\t" + e + "\n\n" + "Activate 'Console' or Developer Tools." + "\n\n" + msg;
 		alert(msg);
