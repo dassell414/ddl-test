@@ -199,7 +199,7 @@ var wa_view = function() {
 	s.t();
 
 	//	... dump to Console for validation ...
-	logJson(s.contextData);
+	logJson();
 	
 	//  ... and reset everything
 //	s.contextData = '';
@@ -229,19 +229,19 @@ var wa_action = function(evtNm) {
 	s.tl(true, 'o', evtNm);
 
 	//	... dump to Console for validation ...
-	logJson(s.contextData);
+	logJson();
 	
 	//  ... and reset everything
 //	s.contextData = '';
 	dprop = '';
 }
 
-var logJson = function(data)	{
-	var obj = JSON.stringify(data, null, '\t');
+var logJson = function()	{
+	obj = JSON.stringify(s.contextData, null, '\t');
 	try	{
-		console.log(data);
+		console.log(obj);
 	}	catch(e)	{
-		msg = "Error printing DDL to Developer Console: " + "\n\t" + e + "\n\n" + "Activate 'Console' or Developer Tools." + "\n\n" + data;
+		msg = "Error printing DDL to Developer Console: " + "\n\t" + e + "\n\n" + "Activate 'Console' or Developer Tools." + "\n\n" + obj;
 		alert(msg);
 	}
 }
