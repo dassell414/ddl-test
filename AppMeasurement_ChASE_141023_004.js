@@ -230,6 +230,7 @@ var wa_action = function(evtNm) {
 	var cNm = "";
 	var cNms = new Array();
 	var cInd = 0;
+	var cInc = 1;
 	console.log("About to check CDVs: " + '\n' + s.contextData);
 	for (var c in s.contextData) { 
 		cNms[cNms.length] = c;
@@ -239,8 +240,8 @@ var wa_action = function(evtNm) {
 	if (cInd > 0) {
 		for (nm in cNms) {
 			cNm += "contextData." + cNms[nm];
-			cNm += (((nm + 1) < cInd) ? "," : "");
-			console.log("Now nm = " + nm + ", nm + 1 = " + (nm + 1) + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
+			cNm += (((nm + cInc) < cInd) ? "," : "");
+			console.log("Now nm = " + nm + ", nm + 1 = " + (nm + cInc) + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
 		}
 	}
 	console.log("cNm is now set to: " +cNm);
