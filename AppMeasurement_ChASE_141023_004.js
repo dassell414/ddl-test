@@ -239,9 +239,10 @@ var wa_action = function(evtNm) {
 	cInd = cNms.length;
 	if (cInd > 0) {
 		for (nm in cNms) {
+			cInd--;
 			cNm += "contextData." + cNms[nm];
-			cNm += (((nm + cInc) < cInd) ? "," : "");
-			console.log("Now nm = " + nm + ", nm + 1 = " + (nm + cInc) + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
+			cNm += ( ( cInd > 1 ) ? "," : "");
+			console.log("Now nm = " + nm + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
 		}
 	}
 	console.log("cNm is now set to: " +cNm);
