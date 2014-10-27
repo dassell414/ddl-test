@@ -127,7 +127,7 @@ s.doPlugins=s.s_doPlugins;
 var dprop;  //  declare variable for processing DDL
 
 //	set variables that will always be passed
-function wa_std() {
+var wa_std = function() {
 
 	if ( typeof digitalData != 'undefined' ) {
 		if ( digitalData.page.pageInfo.pageName ) { s.contextData['page.pageInfo.pageName'];}
@@ -137,7 +137,7 @@ function wa_std() {
 }
 
 //	set variables that will be passed with 'page view'
-function wa_view() {
+var wa_view = function() {
 	if ( typeof digitalData != 'undefined'  ) {
 		//	get 'standard' variables
 		wa_std();
@@ -193,7 +193,7 @@ function wa_view() {
 }
 
 //	set variables that will be passed with 'action' (i.e. link-tracking)
-function wa_action(evtNm) {
+var wa_action = function(evtNm) {
 	if ( typeof digitalData != 'undefined'  ) {
 		//	get 'standard' variables
 		wa_std();
