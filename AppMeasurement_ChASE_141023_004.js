@@ -160,12 +160,12 @@ var wa_view = function() {
 		try { if ( dprop = digitalData.nbs_application_module.nbs_resumed_application_flag ) { s.contextData['nbs_application_module.nbs_resumed_application_flag'] = dprop;}} catch(e) {};
 		try { if ( dprop = digitalData.nbs_application_module.nbs_resumed_application_initial_page ) { s.contextData['nbs_application_module.nbs_resumed_application_initial_page'] = dprop;}} catch(e) {};
 		try { if ( dprop = digitalData.nbs_application_module.nbs_resumed_application_last_save_date ) { s.contextData['nbs_application_module.nbs_resumed_application_last_save_date'] = dprop;}} catch(e) {};
-		dprop = digitalData.nbs_error_user;  for (dind in dprop) { if ( dprop[dind].nbs_error_description ) { s.contextData['nbs_error_user_' + dind + '.nbs_error_description'] = dprop[dind.nbs_error_description]; } }
-		dprop = digitalData.nbs_error_user;  for (dind in dprop) { if ( dprop[dind].nbs_error_text ) { s.contextData['nbs_error_user_' + dind + '.nbs_error_text'] = dprop[dind.nbs_error_text]; } }
-		dprop = digitalData.nbs_error_system;  for (dind in dprop) { if ( dprop[dind].nbs_error_description ) { s.contextData['nbs_error_system_' + dind + '.nbs_error_description'] = dprop[dind.nbs_error_description]; } }
-		dprop = digitalData.nbs_error_system;  for (dind in dprop) { if ( dprop[dind].nbs_error_text ) { s.contextData['nbs_error_system_' + dind + '.nbs_error_text'] = dprop[dind.nbs_error_text]; } }
-		dprop = digitalData.nbs_error_business;  for (dind in dprop) { if ( dprop[dind].nbs_error_description ) { s.contextData['nbs_error_business_' + dind + '.nbs_error_description'] = dprop[dind.nbs_error_description]; } }
-		dprop = digitalData.nbs_error_business;  for (dind in dprop) { if ( dprop[dind].nbs_error_text ) { s.contextData['nbs_error_business_' + dind + '.nbs_error_text'] = dprop[dind.nbs_error_text]; } }
+		dprop = digitalData.nbs_error_user;  for (dind in dprop) { if ( dprop[dind].nbs_error_description ) { s.contextData['nbs_error_user_' + dind + '.nbs_error_description'] = dprop[dind].nbs_error_description; } }
+		dprop = digitalData.nbs_error_user;  for (dind in dprop) { if ( dprop[dind].nbs_error_text ) { s.contextData['nbs_error_user_' + dind + '.nbs_error_text'] = dprop[dind].nbs_error_text; } }
+		dprop = digitalData.nbs_error_system;  for (dind in dprop) { if ( dprop[dind].nbs_error_description ) { s.contextData['nbs_error_system_' + dind + '.nbs_error_description'] = dprop[dind].nbs_error_description; } }
+		dprop = digitalData.nbs_error_system;  for (dind in dprop) { if ( dprop[dind].nbs_error_text ) { s.contextData['nbs_error_system_' + dind + '.nbs_error_text'] = dprop[dind].nbs_error_text; } }
+		dprop = digitalData.nbs_error_business;  for (dind in dprop) { if ( dprop[dind].nbs_error_description ) { s.contextData['nbs_error_business_' + dind + '.nbs_error_description'] = dprop[dind].nbs_error_description; } }
+		dprop = digitalData.nbs_error_business;  for (dind in dprop) { if ( dprop[dind].nbs_error_text ) { s.contextData['nbs_error_business_' + dind + '.nbs_error_text'] = dprop[dind].nbs_error_text; } }
 		try { if ( dprop = digitalData.nbs_product.nbs_product_type ) { s.contextData['nbs_product.nbs_product_type'] = dprop;}} catch(e) {};
 		try { if ( dprop = digitalData.nbs_product_savings.nbs_sav_name ) { s.contextData['nbs_product_savings.nbs_sav_name'] = dprop;}} catch(e) {};
 		try { if ( dprop = digitalData.nbs_product_savings.nbs_sav_offer ) { s.contextData['nbs_product_savings.nbs_sav_offer'] = dprop;}} catch(e) {};
