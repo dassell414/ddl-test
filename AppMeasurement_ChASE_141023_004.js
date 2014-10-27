@@ -188,7 +188,7 @@ var wa_view = function() {
 	s.t();
 
 	//	... dump to Console for validation ...
-	try { JSON.stringify(s.contextData , null, '\t'); } catch(e) {};
+	JSON.stringify(s.contextData, null, '\t');
 	
 	//  ... and reset everything
 //	s.contextData = '';
@@ -218,7 +218,7 @@ var wa_action = function(evtNm) {
 	s.tl(true, 'o', evtNm);
 
 	//	... dump to Console for validation ...
-	try { JSON.stringify(s.contextData , null, '\t'); } catch(e) {};
+	JSON.stringify(s.contextData, null, '\t');
 	
 	//  ... and reset everything
 //	s.contextData = '';
