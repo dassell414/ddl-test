@@ -43,6 +43,17 @@ s.usePlugins=true;
 s.s_doPlugins = function(s) {
 	/* Add calls to plugins here */
 	
+	//	BTL - set a pageName value to avoid errors
+	if (!s.pageName)	{
+		try { s.pageName = digitalData.page.pageInfo.pageName } catch(e) {};
+		if (!s.pageName)	{
+			try { s.pageName = s.pageURL } catch(e) {};
+		}
+		if (!s.pageName)	{
+			s.pageName = "Page name not found";
+		}
+	}
+	
 	//  BTL - delete as prefix is pre-specified
 	//	Prefix s.pageName with "ynw:" (if it doesn't already contain that string)
 	/*
