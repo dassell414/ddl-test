@@ -191,7 +191,7 @@ var wa_view = function() {
 	try{ 
 		console.log(JSON.stringify(s.contextData, null, '\t')); 
 	} catch(e) { 
-		msg = "Error showing DDL: " + e + "\n" + "Activate console or developer tools." + "\n" + JSON.stringify(s.contextData, null, '\t'));
+		msg = "Error showing DDL: " + e + "\n" + "Activate console or developer tools." + "\n" + JSON.stringify(s.contextData, null, '\t');
 		alert(msg);
 	}
 	
