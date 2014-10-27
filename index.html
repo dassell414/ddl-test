@@ -23,6 +23,16 @@
         ]
     }
     ;
+    
+    function ddlAction()  {
+      if ( typeof digitalData === 'undefined')  {
+        var digitalData = {};
+      }
+      evtNm = document.forms['ddlTest'].eventName.value;
+      inpNm = document.forms['ddlTest'].inputValue.value;
+      digitalData.nbs_user_input[0].nbs_input_name = inpNm;
+      wa_action(evtNm);
+    }
   </script>
 <h1>
   <script type="text/javascript">document.write("Local AppMeasurement version = " + s.appMeasurementVersion);</script>
@@ -33,7 +43,7 @@
 <h1>
   Use this form to test 'wa_action()' function
 </h1>
-<form>
+<form name="ddlTest" onSubmit="return ddlAction()">
 Event Name (used for 'eventName' argument): <input type="text" name="eventName"><br>
 User Input Name: <input type="text" name="inputValue"><br>
 <input type="submit" value="Test link-tracking">
