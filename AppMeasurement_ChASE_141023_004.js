@@ -237,7 +237,7 @@ var wa_action = function(evtNm) {
 }
 
 var logJson = function(data)	{
-	obj = JSON.stringify(data, null, '\t');
+	var obj = JSON.stringify(data, null, '\t');
 	try	{
 		console.log(data);
 	}	catch(e)	{
