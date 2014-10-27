@@ -237,7 +237,7 @@ var wa_action = function(evtNm) {
 }
 
 var logJson = function()	{
-	obj = JSON.stringify(s.contextData, null, '\t');
+	obj = JSON.stringify(digitalData, null, '\t');
 	msg = "Log of DDL (parsed): " + "\n" + obj;
 	try	{
 		console.log(msg);
