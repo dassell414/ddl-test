@@ -191,7 +191,7 @@ var wa_view = function() {
 	try { JSON.stringify(s.contextData , null, '\t'); } catch(e) {};
 	
 	//  ... and reset everything
-	s.contextData = '';
+//	s.contextData = '';
 	dprop = '';
 }
 
@@ -221,7 +221,7 @@ var wa_action = function(evtNm) {
 	try { JSON.stringify(s.contextData , null, '\t'); } catch(e) {};
 	
 	//  ... and reset everything
-	s.contextData = '';
+//	s.contextData = '';
 	dprop = '';
 }
 
