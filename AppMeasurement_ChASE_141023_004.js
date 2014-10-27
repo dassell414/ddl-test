@@ -202,7 +202,7 @@ var wa_view = function() {
 	logJson();
 	
 	//  ... and reset everything
-//	s.contextData = '';
+	s.contextData = '';
 	dprop = '';
 }
 
@@ -225,6 +225,30 @@ var wa_action = function(evtNm) {
 		dprop = digitalData.nbs_element_interaction;  for (dind in dprop) { if ( dprop[dind].nbs_interaction_label ) { s.contextData['nbs_element_interaction_' + dind + '.nbs_interaction_label'] = dprop[dind].nbs_interaction_label; } }
 	}
 	
+	//	Set linkTrackVars to pick up all Context Data Variables
+	//	REMOVE DEBUG INFO!
+	var cNm = "";
+	var cNms = new Array();
+	var cInd = 0;
+	for (var c in s.contextData) { 
+		cNms[cNms.length] = c;
+	}
+	cInd = cNms.length;
+	if (cInd > 0) {
+		for (nm in cNms) {
+			cNm += "contextData." + cNms[nm];
+			cNm += ((nm + 1 < cInd) ? "," : "");
+			console.log("For nm = " + nm + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
+		}
+	}
+	console.log("cNm is now set to: " +cNm);
+	console.log("linkTrackVars is now set to: " + s.linkTrackVars);
+	if ( s.linkTrackVars === "None" || s.linkTrackVars === "") {
+		s.linkTrackVars = cNm;
+	} else {
+		s.linkTrackVars += "," + cNm;
+	}
+	console.log("linkTrackVars is now set to: " + s.linkTrackVars);
 	//	Make the call ...
 	s.tl(true, 'o', evtNm);
 
@@ -232,7 +256,7 @@ var wa_action = function(evtNm) {
 	logJson();
 	
 	//  ... and reset everything
-//	s.contextData = '';
+	s.contextData = '';
 	dprop = '';
 }
 
