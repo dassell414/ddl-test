@@ -199,12 +199,7 @@ var wa_view = function() {
 	s.t();
 
 	//	... dump to Console for validation ...
-	try{ 
-		console.log(JSON.stringify(s.contextData, null, '\t')); 
-	} catch(e) { 
-		msg = "Error showing DDL: " + e + "\n" + "Activate console or developer tools." + "\n" + JSON.stringify(s.contextData, null, '\t');
-		alert(msg);
-	}
+	logJson(s.contextData);
 	
 	//  ... and reset everything
 //	s.contextData = '';
@@ -234,11 +229,20 @@ var wa_action = function(evtNm) {
 	s.tl(true, 'o', evtNm);
 
 	//	... dump to Console for validation ...
-	alert(JSON.stringify(s.contextData));
+	logJson(s.contextData);
 	
 	//  ... and reset everything
 //	s.contextData = '';
 	dprop = '';
+}
+
+var logJson = function(data)	{
+	obj = JSON.stringify(data, null, '\t');
+	try	{
+		console.log(data);
+	}	catch(e)	{
+		msg = "Error printing DDL to Developer Console: " + + "\n\t" e + "\n\n" + "Activate 'Console' or Developer Tools." + "\n\n"
+	}
 }
 
 /* References to plugins here */
