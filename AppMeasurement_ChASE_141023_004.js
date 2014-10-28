@@ -270,7 +270,7 @@ var logJson = function()	{
 	try	{
 		console.log(msg);
 	}	catch(e)	{
-		msg = "Error printing DDL to Developer Console: " + "\n\t" + e + "\n\n" + "Activate 'Console' or Developer Tools." + "\n\n" + msg;
+		msg = "Error printing DDL to Developer Console: " + "\n\t" + e + "\n\n" + "Activate 'Console' or Developer Tools (try the F12 key)." + "\n\n" + msg;
 		alert(msg);
 	}
 }
