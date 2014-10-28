@@ -226,33 +226,26 @@ var wa_action = function(evtNm) {
 	}
 	
 	//	Set linkTrackVars to pick up all Context Data Variables
-	//	REMOVE DEBUG INFO!
 	var cNm = "";
 	var cNms = new Array();
 	var cInd = 0;
-	var cInc = 1;
-	console.log("About to check CDVs: " + '\n' + s.contextData);
 	for (var c in s.contextData) { 
 		cNms[cNms.length] = c;
 	}
-	console.log("cNms is: " + cNms);
 	cInd = cNms.length;
 	if (cInd > 0) {
 		for (nm in cNms) {
 			cInd--;
 			cNm += "contextData." + cNms[nm];
 			cNm += ( ( cInd > 0 ) ? "," : "");
-			console.log("Now nm = " + nm + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
 		}
 	}
-	console.log("cNm is now set to: " +cNm);
-	console.log("linkTrackVars is now set to: " + s.linkTrackVars);
 	if ( s.linkTrackVars === "None" || s.linkTrackVars === "") {
 		s.linkTrackVars = cNm;
 	} else {
 		s.linkTrackVars += "," + cNm;
 	}
-	console.log("linkTrackVars is now set to: " + s.linkTrackVars);
+
 	//	Make the call ...
 	s.tl(true, 'o', evtNm);
 
