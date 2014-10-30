@@ -1,7 +1,8 @@
 /*****************************
 
  * NOTE:
- *
+ * 
+ * NON-PRODUCTION CODE
  * This file does not represent production-grade code.
  * This file must not be used in a production system.
  * 
@@ -9,8 +10,10 @@
  * Nationwide Web Analytics team for use in any production-
  * grade system.
  * 
+ * DEBUGGING CODE INCLUDED
  * This file includes code which generates messages in the
- * developer console of all modern browsers.
+ * developer console of all modern browsers for debugging
+ * purposes.
  * Access the console using the F12 key (or the relevant
  * menu entry).
 
