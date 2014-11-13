@@ -140,6 +140,8 @@ var dprop;  //  declare variable for processing DDL
 
 //	set variables that will always be passed
 var wa_std = function() {
+	//	start with new 's' object
+	var s = s_gi(s_account);
 
 	if ( typeof (digitalData) != 'undefined' ) {
 		try { if ( dprop = digitalData.page.pageInfo.pageName ) { s.pageName = dprop;}} catch(e) {};
@@ -260,7 +262,7 @@ var wa_view = function() {
 	logJson();
 	
 	//  ... and reset everything
-	s.contextData = {};
+//	s.contextData = {};
 	dprop = '';
 }
 
@@ -312,7 +314,7 @@ var wa_action = function(evtNm) {
 	logJson();
 	
 	//  ... and reset everything
-	s.contextData = {};
+//	s.contextData = {};
 	dprop = '';
 }
 
