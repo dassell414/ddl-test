@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="/ddl-test/AppMeasurement_DOTT.js"></script>
+  <title>
+    DOTT Test Page by Barry
+  </title>
+</head>
+<body>
+
+<script type="text/javascript">
+  var digitalData = {
+    page:
+      {pageInfo:
+        {pageName:"test page"
+        , nbs_page_responsive_state:"test responsive state"
+        , nbs_page_responsive_orientation:"test responsive orientation"}
+      }
+      , nbs_error_user:[
+          {nbs_error_description:"first error"
+          , nbs_error_text:"This is the first error.  It is a good error."
+          } 
+        ]
+    }
+    ;
+    
+    var ddlAction = function()  {
+      if ( typeof digitalData.nbs_user_input === 'undefined')  {
+        digitalData.nbs_user_input = [];
+      }
+      evtNm = document.forms['ddlTest'].eventName.value;
+      console.log("eventName argument set to: " + evtNm);
+      inpNm = document.forms['ddlTest'].inputValue.value;
+      console.log("nbs_input_name value set to: " + inpNm);
+      digitalData.nbs_user_input.unshift({nbs_input_name:inpNm});
+      console.log(digitalData);
+/*      var cNm = "";
+      var cNms = new Array();
+      var cInd = 0;
+      for (var c in s.contextData) { cNms[cNms.length] = c; }
+      cInd = cNms.length;
+      if (cInd > 0) {
+        for (nm in cNms) {
+          cNm += "contextData." + cNms[nm];
+          cNm += ((nm + 1 < cInd) ? "," : "");
+          console.log("For nm = " + nm + ", cInd = " + cInd + ", and cNms[nm] = " + cNms[nm]);
+        }
+      }
+      console.log("cNm is now set to: " +cNm);
+      console.log("linkTrackVars is now set to: " + s.linkTrackVars);
+      if ( s.linkTrackVars === "None" || s.linkTrackVars === "")  {
+        s.linkTrackVars = cNm;
+      } else  {
+        s.linkTrackVars += "," + cNm;
+      }
+      console.log("linkTrackVars is now set to: " + s.linkTrackVars);
+  */    wa_action(evtNm);
+    }
+  </script>
+<h1>
+  <script type="text/javascript">document.write("Local AppMeasurement version = " + s.appMeasurementVersion);</script>
+</h1>
+<h1>Hello World</h1>
+<p>I'm hosted with GitHub Pages (in 'gh-pages' branch).</p>
+
+<h1>
+  Use this form to test 'wa_action()' function
+</h1>
+<form name="ddlTest" onSubmit="ddlAction(); return false">
+Event Name (used for 'eventName' argument): <input type="text" name="eventName"><br>
+User Input Name: <input type="text" name="inputValue"><br>
+<input type="submit" value="Test link-tracking">
+</form> 
+  <script type="text/javascript">wa_view();</script>
+</body>
+</html>
