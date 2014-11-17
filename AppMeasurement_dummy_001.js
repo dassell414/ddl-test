@@ -109,8 +109,10 @@ s.s_doPlugins = function (s) {
 	*/
 
     s.contextData['navigation'] = s.Util.cookieRead("navigation");
-
-    nbs.cookie.destroy("navigation");
+    
+    if ( s.timestamp && s.timestamp != 0 )	{
+    	nbs.cookie.destroy("navigation");
+    }
 
     var deferredVariables = s.Util.cookieRead("deferred");
     var item = s.split(deferredVariables, ":");
