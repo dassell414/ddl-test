@@ -9,7 +9,7 @@ s.linkTrackVars = "None";
 s.linkTrackEvents = "None";
 
 //An internal version number signifying which internal customised version of the code is being used.  This should change every time a new js file is deployed.  
-s.appMeasurementVersion = "1.2.1_20141118";
+s.appMeasurementVersion = "1.2.1_20141118_001";
 
 s.cookieDomainPeriods = "3";
 s.fpCookieDomainPeriods = "3";
@@ -133,6 +133,12 @@ s.s_doPlugins = function (s) {
 
     //pass the visitor cookie ID into prop71
     s.prop71 = "D=s_vi";
+    
+    console.log("s.j is : " + s.j);
+    console.log("s.timestamp is : " + s.timestamp);
+    console.log("s.linktype is : " + s.linktype);
+    console.log("s.J is : " + s.J);
+    console.log("'navigation' cookie is: " + s.c_r('navigation'));
 
 }
 s.doPlugins = s.s_doPlugins;
