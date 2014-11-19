@@ -9,7 +9,7 @@ s.linkTrackVars = "None";
 s.linkTrackEvents = "None";
 
 //An internal version number signifying which internal customised version of the code is being used.  This should change every time a new js file is deployed.  
-s.appMeasurementVersion = "1.2.1_20141118_002";
+s.appMeasurementVersion = "1.2.1_20141118_003";
 
 s.cookieDomainPeriods = "3";
 s.fpCookieDomainPeriods = "3";
@@ -110,7 +110,7 @@ s.s_doPlugins = function (s) {
 
     s.contextData['navigation'] = s.Util.cookieRead("navigation");
     
-    if ( s.j )	{
+    if ( !s.j )	{
     	nbs.cookie.destroy("navigation");
     }
 
