@@ -110,7 +110,7 @@ s.s_doPlugins = function (s) {
 
     s.contextData['navigation'] = s.Util.cookieRead("navigation");
     
-    if ( s.J && s.J === !1 )	{
+    if ( s.j && s.j === 0 )	{
     	nbs.cookie.destroy("navigation");
     }
 
