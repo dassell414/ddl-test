@@ -110,14 +110,7 @@ s.s_doPlugins = function (s) {
 
     s.contextData['navigation'] = s.Util.cookieRead("navigation");
     
-    //	Create array variable which lists the campaign parameters of interest
-	var qsp_camp = [
-		'cid'
-		, 'cmp_id'
-		, 'et_rid'
-		, 'et_cid'
-		, 'test_cid'
-	];
+    
 	
 	//	Loop through the entries in the "qsp_camp" array
 	//	For each entry, test if a Query String Parameter exists with that name
@@ -139,6 +132,15 @@ s.s_doPlugins = function (s) {
     if ( !s.j )	{
     	nbs.cookie.destroy("navigation");
     }
+
+//	Create array variable which lists the campaign parameters of interest
+var qsp_camp = [
+	'cid'
+	, 'cmp_id'
+	, 'et_rid'
+	, 'et_cid'
+	, 'test_cid'
+];
 
     var deferredVariables = s.Util.cookieRead("deferred");
     var item = s.split(deferredVariables, ":");
