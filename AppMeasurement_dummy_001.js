@@ -32,6 +32,9 @@ s.currencyCode = "GBP";
 //Within the CMS, all pages should have the channel variable hardcoded to “Brochureware”
 s.channel = "github";
 
+//	Flag(s) to ensure query string parameter-to-CDV activity only runs once:
+var qsp_camp_runonce = true;
+
 /* Plugin Config */
 s.usePlugins = true;
 s.s_doPlugins = function (s) {
@@ -110,11 +113,18 @@ s.s_doPlugins = function (s) {
 
     s.contextData['navigation'] = s.Util.cookieRead("navigation");
     
-    
+ //	Create array variable which lists the campaign parameters of interest
+	var qsp_camp = [
+		'cid'
+		, 'cmp_id'
+		, 'et_rid'
+		, 'et_cid'
+		, 'test_cid'
+	];
 	
 	//	Loop through the entries in the "qsp_camp" array
 	//	For each entry, test if a Query String Parameter exists with that name
-	if ( qsp_camp && qsp_camp.length > 0 )	{	//	check it exists AND has more than zero items
+	if ( qsp_camp_runonce && qsp_camp && qsp_camp.length > 0 )	{	//	check it exists AND has more than zero items
 		console.log("Starting loop");
 		for ( q in qsp_camp )	{
 			var a = qsp_camp[q];
@@ -133,14 +143,6 @@ s.s_doPlugins = function (s) {
     	nbs.cookie.destroy("navigation");
     }
 
-//	Create array variable which lists the campaign parameters of interest
-var qsp_camp = [
-	'cid'
-	, 'cmp_id'
-	, 'et_rid'
-	, 'et_cid'
-	, 'test_cid'
-];
 
     var deferredVariables = s.Util.cookieRead("deferred");
     var item = s.split(deferredVariables, ":");
