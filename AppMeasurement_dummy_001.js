@@ -9,7 +9,7 @@ s.linkTrackVars = "None";
 s.linkTrackEvents = "None";
 
 //An internal version number signifying which internal customised version of the code is being used.  This should change every time a new js file is deployed.  
-s.appMeasurementVersion = "1.2.1_20141118_003";
+s.appMeasurementVersion = "1.2.1_20141127_001";
 
 s.cookieDomainPeriods = "3";
 s.fpCookieDomainPeriods = "3";
@@ -31,9 +31,6 @@ s.currencyCode = "GBP";
 
 //Within the CMS, all pages should have the channel variable hardcoded to “Brochureware”
 s.channel = "github";
-
-//	Flag(s) to ensure query string parameter-to-CDV activity only runs once:
-var qsp_camp_runonce = true;
 
 /* Plugin Config */
 s.usePlugins = true;
@@ -112,37 +109,31 @@ s.s_doPlugins = function (s) {
 	*/
 
     s.contextData['navigation'] = s.Util.cookieRead("navigation");
-    
- //	Create array variable which lists the campaign parameters of interest
-	var qsp_camp = [
-		'cid'
-		, 'cmp_id'
-		, 'et_rid'
-		, 'et_cid'
-		, 'test_cid'
-	];
-	
-	//	Loop through the entries in the "qsp_camp" array
-	//	For each entry, test if a Query String Parameter exists with that name
-	if ( qsp_camp_runonce && qsp_camp && qsp_camp.length > 0 )	{	//	check it exists AND has more than zero items
-		console.log("Starting loop");
-		for ( q in qsp_camp )	{
-			var a = qsp_camp[q];
-			console.log("'q' is set to: " + q);
-			console.log("'a' is set to: " + a);
-			c = s.Util.getQueryParam(a.toLowerCase(), s.pageURL.toLowerCase());
-			console.log("'c' is set to: " + c);
-			if ( c.length > 0 )	{
-				s.contextData["nbs_campaign." + a] = c;
-			}
-			console.log("'contextData' is set to: " + JSON.stringify(s.contextData));
-		}
-	}
-    
-    if ( !s.j )	{
-    	nbs.cookie.destroy("navigation");
+
+    //	Create array variable which lists the campaign parameters of interest
+    var qsp_camp = [
+        'cid', 'cmp_id', 'et_rid', 'et_cid', 'test_cid'];
+
+    //	Loop through the entries in the "qsp_camp" array
+    //	For each entry, test if a Query String Parameter exists with that name
+    if (qsp_camp && qsp_camp.length > 0) { //	check it exists AND has more than zero items
+        console.log("Starting loop");
+        for (q in qsp_camp) {
+            var a = qsp_camp[q];
+            console.log("'q' is set to: " + q);
+            console.log("'a' is set to: " + a);
+            c = s.Util.getQueryParam(a.toLowerCase(), s.pageURL.toLowerCase());
+            console.log("'c' is set to: " + c);
+            if (c.length > 0) {
+                s.contextData["nbs_campaign." + a] = c;
+            }
+            console.log("'contextData' is set to: " + JSON.stringify(s.contextData));
+        }
     }
 
+    if (!s.j) {
+        nbs.cookie.destroy("navigation");
+    }
 
     var deferredVariables = s.Util.cookieRead("deferred");
     var item = s.split(deferredVariables, ":");
@@ -163,7 +154,7 @@ s.s_doPlugins = function (s) {
 
     //pass the visitor cookie ID into prop71
     s.prop71 = "D=s_vi";
-    
+
     console.log("s.j is : " + s.j);
     console.log("s.timestamp is : " + s.timestamp);
     console.log("s.linktype is : " + s.linktype);
