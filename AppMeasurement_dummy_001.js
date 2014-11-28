@@ -118,7 +118,7 @@ s.s_doPlugins = function (s) {
 
     //	Loop through the entries in the "qsp_camp" array
     //	For each entry, test if a Query String Parameter exists with that name
-    if (qsp_camp && qsp_camp.length > 0) { //	check it exists AND has more than zero items
+    if (qsp_camp_runonce && qsp_camp && qsp_camp.length > 0) { //	check it exists AND has more than zero items
         console.log("Starting loop");
         for (q in qsp_camp) {
             var a = qsp_camp[q];
