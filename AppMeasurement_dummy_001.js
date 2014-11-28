@@ -136,6 +136,7 @@ s.s_doPlugins = function (s) {
 
     if (!s.j) {
         nbs.cookie.destroy("navigation");
+        qsp_camp_runonce = false;
     }
 
     var deferredVariables = s.Util.cookieRead("deferred");
