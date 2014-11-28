@@ -32,6 +32,9 @@ s.currencyCode = "GBP";
 //Within the CMS, all pages should have the channel variable hardcoded to “Brochureware”
 s.channel = "github";
 
+//	"Run once" flag(s):
+var qsp_camp_runonce = true;
+
 /* Plugin Config */
 s.usePlugins = true;
 s.s_doPlugins = function (s) {
@@ -114,8 +117,6 @@ s.s_doPlugins = function (s) {
     var qsp_camp = [
         'cid', 'cmp_id', 'et_rid', 'et_cid', 'test_cid'];
        
-    var qsp_camp_runonce = true;
-
     //	Loop through the entries in the "qsp_camp" array
     //	For each entry, test if a Query String Parameter exists with that name
     if (qsp_camp_runonce && qsp_camp && qsp_camp.length > 0) { //	check it exists AND has more than zero items
