@@ -9,7 +9,7 @@ s.linkTrackVars = "None";
 s.linkTrackEvents = "None";
 
 //An internal version number signifying which internal customised version of the code is being used.  This should change every time a new js file is deployed.  
-s.appMeasurementVersion = "1.2.1_20141127_001";
+s.appMeasurementVersion = "1.2.1_20141128_001";
 
 s.cookieDomainPeriods = "3";
 s.fpCookieDomainPeriods = "3";
@@ -113,6 +113,8 @@ s.s_doPlugins = function (s) {
     //	Create array variable which lists the campaign parameters of interest
     var qsp_camp = [
         'cid', 'cmp_id', 'et_rid', 'et_cid', 'test_cid'];
+       
+    var qsp_camp_runonce = true;
 
     //	Loop through the entries in the "qsp_camp" array
     //	For each entry, test if a Query String Parameter exists with that name
