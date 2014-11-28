@@ -119,7 +119,7 @@ s.s_doPlugins = function (s) {
        
     //	Loop through the entries in the "qsp_camp" array
     //	For each entry, test if a Query String Parameter exists with that name
-    if (qsp_camp_runonce && qsp_camp && qsp_camp.length > 0) { //	check it exists AND has more than zero items
+    if (qsp_camp_runonce && qsp_camp && qsp_camp.length > 0) { //	check "runonce" flag, check array exists and has entries
         console.log("Starting loop");
         for (q in qsp_camp) {
             var a = qsp_camp[q];
@@ -131,6 +131,15 @@ s.s_doPlugins = function (s) {
                 s.contextData["nbs_campaign." + a] = c;
             }
             console.log("'contextData' is set to: " + JSON.stringify(s.contextData));
+        }
+    }	else if (!qsp_camp_runonce && qsp_camp && qsp_camp.length > 0)	{	//	if already run, wipe the CDVs
+    	console.log("Starting wipe of CDVs");
+        for (q in qsp_camp) {
+            var a = qsp_camp[q];
+            var b = s.contextData.a;
+            console.log("'q' is set to: " + q);
+            console.log("'a' is set to: " + a);
+            console.log("'b' is set to: " + b);
         }
     }
 
