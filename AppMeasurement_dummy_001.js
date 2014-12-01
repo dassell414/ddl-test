@@ -62,9 +62,9 @@ s.s_doPlugins = function (s) {
 
     /* Provide code version change notes detail number */
     if (s.appMeasurementVersion) {
-        contextData['nbs_version_sc'] = s.appMeasurementVersion;
+        s.contextData['nbs_version_sc'] = s.appMeasurementVersion;
     } else {
-        contextData['nbs_version_sc'] = 'unknown';
+        s.contextData['nbs_version_sc'] = 'unknown';
     }
 
     //	4.8. Exact target Recipient ID (BTS-002) Must 
