@@ -35,6 +35,11 @@ s.channel = "github";
 //	"Run once" flag(s):
 var qsp_camp_runonce = true;
 
+var nwa = {};
+	nwa.cookieExpire = function(n) {
+	return s.Util.cookieWrite(n, "", -1)
+}
+
 /* Plugin Config */
 s.usePlugins = true;
 s.s_doPlugins = function (s) {
@@ -54,10 +59,6 @@ s.s_doPlugins = function (s) {
     ///Capture previous page name value
     s.prop19 = s.getPreviousValue(s.pageName, 'gpv_p19', '');
 
-    s.prop73 = nbs.state + " site"; //repsonsive state
-    if (nbs.respond.orientation !== "") {
-        s.prop73 += "|" + nbs.respond.orientation;
-    }
 
     /* Provide code version change notes detail number */
     if (s.appMeasurementVersion) {
@@ -147,14 +148,14 @@ s.s_doPlugins = function (s) {
     }
 
     if (!s.j) {
-        nbs.cookie.destroy("navigation");
+        nwa.cookieExpire("navigation");
         qsp_camp_runonce = false;
     }
 
     var deferredVariables = s.Util.cookieRead("deferred");
     var item = s.split(deferredVariables, ":");
     s[item[0]] = s.apl(s[item[0]], item[1], ',', 1);
-    nbs.cookie.destroy("deferred");
+    nwa.cookieExpire("deferred");
 
     //	Sub-section	eVar	prop
     //Sub-section 0	eVar1	Prop1
