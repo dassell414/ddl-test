@@ -131,8 +131,7 @@ s.s_doPlugins = function (s) {
             console.log("'c' is set to: " + c);
             if (c.length > 0) {
                 s.contextData[b + "." + a] = c;
-	            if(s.linkType)	{
-	            }
+
             }
             console.log("'contextData' is set to: " + JSON.stringify(s.contextData));
         }
