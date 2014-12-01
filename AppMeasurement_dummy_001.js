@@ -132,7 +132,7 @@ s.s_doPlugins = function (s) {
             if (c.length > 0) {
                 s.contextData[b + "." + a] = c;
 		if (s.linkType)	{
-			s.linkTrackVars += ",'contextData." + b + "." + a + "'";
+			s.linkTrackVars += ",contextData." + b + "." + a;
 			console.log("'s.linkTrackVars' is set to: " + s.linkTrackVars);
 		}
             }
