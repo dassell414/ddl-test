@@ -123,6 +123,7 @@ s.s_doPlugins = function (s) {
         console.log("Starting loop");
         for (q in qsp_camp) {
             var a = qsp_camp[q];
+            var b = "nbs_campaign";
             console.log("'q' is set to: " + q);
             console.log("'a' is set to: " + a);
             c = s.Util.getQueryParam(a.toLowerCase(), s.pageURL.toLowerCase());
@@ -136,10 +137,12 @@ s.s_doPlugins = function (s) {
     	console.log("Starting wipe of CDVs");
         for (q in qsp_camp) {
             var a = qsp_camp[q];
-            var b = s.contextData.a;
+            var b = "nbs_campaign";
+            var c = s.contextData.b.a;
             console.log("'q' is set to: " + q);
             console.log("'a' is set to: " + a);
             console.log("'b' is set to: " + b);
+            console.log("'c' is set to: " + c);
         }
     }
 
