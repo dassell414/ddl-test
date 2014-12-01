@@ -129,7 +129,7 @@ s.s_doPlugins = function (s) {
             c = s.Util.getQueryParam(a.toLowerCase(), s.pageURL.toLowerCase());
             console.log("'c' is set to: " + c);
             if (c.length > 0) {
-                s.contextData["nbs_campaign." + a] = c;
+                s.contextData[b + "." + a] = c;
             }
             console.log("'contextData' is set to: " + JSON.stringify(s.contextData));
         }
