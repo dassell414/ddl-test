@@ -138,11 +138,11 @@ s.s_doPlugins = function (s) {
         for (q in qsp_camp) {
             var a = qsp_camp[q];
             var b = "nbs_campaign";
-            var c = s.contextData[b.a];
             console.log("'q' is set to: " + q);
             console.log("'a' is set to: " + a);
             console.log("'b' is set to: " + b);
-            console.log("'c' is set to: " + c);
+            s.contextData[b + "." + a] = '';
+            console.log("'contextData' is set to: " + JSON.stringify(s.contextData));
         }
     }
 
