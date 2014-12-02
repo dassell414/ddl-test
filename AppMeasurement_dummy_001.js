@@ -121,33 +121,33 @@ s.s_doPlugins = function (s) {
     //	Loop through the entries in the "qsp_camp" array
     //	For each entry, test if a Query String Parameter exists with that name
     if (qsp_camp_runonce && qsp_camp && qsp_camp.length > 0) { //	check "runonce" flag, check array exists and has entries
-        console.log("Starting loop");
+        //        console.log("Starting loop");
         for (q in qsp_camp) {
             var a = qsp_camp[q];
             var b = "nbs_campaign";
-            console.log("'q' is set to: " + q);
-            console.log("'a' is set to: " + a);
+            //        console.log("'q' is set to: " + q);
+            //        console.log("'a' is set to: " + a);
             c = s.Util.getQueryParam(a.toLowerCase(), s.pageURL.toLowerCase());
-            console.log("'c' is set to: " + c);
+            //        console.log("'c' is set to: " + c);
             if (c.length > 0) {
                 s.contextData[b + "." + a] = c;
 		if (s.linkType)	{
 			s.linkTrackVars += ",contextData." + b + "." + a;
-			console.log("'s.linkTrackVars' is set to: " + s.linkTrackVars);
+			//        console.log("'s.linkTrackVars' is set to: " + s.linkTrackVars);
 		}
             }
-            console.log("'contextData' is set to: " + JSON.stringify(s.contextData));
+            //        console.log("'contextData' is set to: " + JSON.stringify(s.contextData));
         }
     }	else if (!qsp_camp_runonce && qsp_camp && qsp_camp.length > 0)	{	//	if already run, wipe the CDVs
-    	console.log("Starting wipe of CDVs");
+    	//        console.log("Starting wipe of CDVs");
         for (q in qsp_camp) {
             var a = qsp_camp[q];
             var b = "nbs_campaign";
-            console.log("'q' is set to: " + q);
-            console.log("'a' is set to: " + a);
-            console.log("'b' is set to: " + b);
+            //        console.log("'q' is set to: " + q);
+            //        console.log("'a' is set to: " + a);
+            //        console.log("'b' is set to: " + b);
             s.contextData[b + "." + a] = '';
-            console.log("'contextData' is set to: " + JSON.stringify(s.contextData));
+            //        console.log("'contextData' is set to: " + JSON.stringify(s.contextData));
         }
     }
 
@@ -176,11 +176,11 @@ s.s_doPlugins = function (s) {
     //pass the visitor cookie ID into prop71
     s.prop71 = "D=s_vi";
 
-    console.log("s.j is : " + s.j);
-    console.log("s.timestamp is : " + s.timestamp);
-    console.log("s.linktype is : " + s.linktype);
-    console.log("s.J is : " + s.J);
-    console.log("'navigation' cookie is: " + s.c_r('navigation'));
+    //        console.log("s.j is : " + s.j);
+    //        console.log("s.timestamp is : " + s.timestamp);
+    //        console.log("s.linktype is : " + s.linktype);
+    //        console.log("s.J is : " + s.J);
+    //        console.log("'navigation' cookie is: " + s.c_r('navigation'));
 
 }
 s.doPlugins = s.s_doPlugins;
