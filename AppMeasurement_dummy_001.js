@@ -635,7 +635,7 @@ window.wa_component = (function () {
 						var arrayLimit = 1
 						var isExpirable = true
 						if (fieldTemplate.arrayLimit) arrayLimit = fieldTemplate.arrayLimit
-						if (fieldTemplate.isExpirable) arrayLimit = fieldTemplate.isExpirable
+						if (fieldTemplate.isExpirable) isExpirable = fieldTemplate.isExpirable
 						for (var k = 0, l = fieldDigitalData.length; k < l; k++)
 						{
 							if (!isExpirable || (k<arrayLimit && typeof fieldDigitalData[k].nbs_sc_expired == "undefined"))
