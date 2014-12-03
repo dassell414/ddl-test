@@ -57,6 +57,23 @@ document.write('<script type="text/javascript" src="http://your.nationwide.co.uk
         ]
     }
     ;
+    digitalData.nbs_user_input = [{
+	nbs_input_name:'name #0',
+	nbs_input_validation_status:'name #0',
+	nbs_input_validation_message:'name #0'},{
+	nbs_input_name:'name #1',
+	nbs_input_validation_status:'name #1',
+	nbs_input_validation_message:'name #1'},{
+	nbs_input_name:'name #2',
+	nbs_input_validation_status:'name #2',
+	nbs_input_validation_message:'name #2'},{
+	nbs_input_name:'name #3',
+	nbs_input_validation_status:'name #3',
+	nbs_input_validation_message:'name #3'},{
+	nbs_input_name:'name #4',
+	nbs_input_validation_status:'name #4',
+	nbs_input_validation_message:'name #4'}]
+	;
 </script>
 <script type="text/javascript">
 <!--
@@ -177,6 +194,18 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager', 'aspnetForm',
 	
 			    <div id="nbs-logo" >
 				    <a href="#" onclick="digitalData.nbs_element_interaction={nbs_interaction_type:'Navigation',nbs_interaction_label:'Top of Page'};               wa_action('misc_interaction')"><h1>'misc_interaction' in action - click here!</h1></a>
+				    <h2>On your side</h2>
+			    </div>
+			    <div id="nbs-logo" >
+				    <a href="#" onclick="digitalData.nbs_element_interaction={nbs_interaction_type:'Navigation',nbs_interaction_label:'Top of Page'};               wa_action('user_input_complete')"><h1>'user_input_complete' in action - click here!</h1></a>
+				    <h2>On your side</h2>
+			    </div>
+			    <div id="nbs-logo" >
+				    <a href="#" onclick="digitalData.nbs_element_interaction={nbs_interaction_type:'Navigation',nbs_interaction_label:'Top of Page'};               wa_action('misc_rubbish')"><h1>'misc_rubbish' in action - click here!</h1></a>
+				    <h2>On your side</h2>
+			    </div>
+			    <div id="nbs-logo" >
+				    <a href="#" onclick="digitalData.nbs_element_interaction={nbs_interaction_type:'Navigation',nbs_interaction_label:'Top of Page'};               wa_action()"><h1>[blank] in action - click here!</h1></a>
 				    <h2>On your side</h2>
 			    </div>
                 <ul id="nav-list">
