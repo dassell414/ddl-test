@@ -9,7 +9,7 @@ s.linkTrackVars = "None";
 s.linkTrackEvents = "None";
 
 //An internal version number signifying which internal customised version of the code is being used.  This should change every time a new js file is deployed.  
-s.appMeasurementVersion = "1.2.1_20141203_001";
+s.appMeasurementVersion = "1.2.1_20141204_001";
 
 s.cookieDomainPeriods = "3";
 s.fpCookieDomainPeriods = "3";
@@ -208,6 +208,7 @@ s.getPreviousValue = new Function("v", "c", "el", "" + "var s=this,t=new Date,i,
 s.apl = new Function("l", "v", "d", "u", "var s=this,m=0;if(!l)l='';if(u){var i,n,a=s.split(l,d);for(i=0;i<a.length;i++){n=a[i];m=m||(u==1?(n==v):(n.toLowerCase()==v.toLowerCase()));}}if(!m)l=l?l+d+v:v;return l");
 
 //	DDL STUFF
+//	version: 0.1.1
 // TODO how to implement forced link tracking.  is this 'this'?
 
 
@@ -217,441 +218,474 @@ s.apl = new Function("l", "v", "d", "u", "var s=this,m=0;if(!l)l='';if(u){var i,
 
 window.wa_component = (function () {
 
-    // The full tree is not in the same format as the tree that is used by the code.  The full tree is a object allowing the sub-trees to be
-    // selected by name.  The result of getCopyTemplate() is in-fact an array of objects whose 'name' properties indicate the name of the
-    // node in question; just like the sub-nodes here.  Also array limits and whether elements are expired is in the method, not here.
-    var fullTree = {
-        page: [
-            "nbs_environment", {
-            name: "pageInfo",
-            children: [
-                "pageName",
-                "nbs_page_responsive_state",
-                "nbs_page_responsive_orientation"]
-        }, {
-            name: "category",
-            children: [
-                "primaryCategory",
-                "nbs_sub_category_1",
-                "nbs_sub_category_2",
-                "nbs_sub_category_3"]
-        }],
-        nbs_user: [
-            "nbs_user_customer_number",
-            "nbs_user_application_route",
-            "nbs_user_application_route_ibreg",
-            "nbs_user_application_route_ownership",
-            "nbs_user_customer_status",
-            "nbs_user_address_type",
-            "nbs_user_postcode",
-            "nbs_user_bfpo_number",
-            "nbs_user_gender",
-            "nbs_user_dateofbirth",
-            "nbs_user_city",
-            "nbs_user_income",
-            "nbs_journey_id"],
-        nbs_product: [
-            "nbs_product_type"],
-        nbs_product_savings: [
-            "nbs_sav_acc_name",
-            "nbs_sav_acc_category",
-            "nbs_sav_acc_withdrawals",
-            "nbs_sav_offer",
-            "nbs_sav_offer_bonusrate",
-            "nbs_sav_offer_withdrawals",
-            "nbs_sav_fee_annual",
-            "nbs_sav_fee_monthly"],
-        nbs_product_creditcard: [
-            "nbs_cc_name",
-            "nbs_cc_offer",
-            "nbs_cc_offer_bt",
-            "nbs_cc_offer_bt_rate",
-            "nbs_cc_offer_bt_duration",
-            "nbs_cc_offer_purchase",
-            "nbs_cc_offer_purchase_rate",
-            "nbs_cc_offer_purchase_duration",
-            "nbs_cc_fee_annual",
-            "nbs_cc_fee_monthly"],
-        nbs_product_currentaccount: [
-            "nbs_ca_name",
-            "nbs_ca_offer",
-            "nbs_ca_fee_annual",
-            "nbs_ca_fee_monthly"],
-        nbs_product_personalloan: [
-            "nbs_pl_name",
-            "nbs_pl_rate_headline"],
-        nbs_application_module: [
-            "nbs_resumed_application_flag",
-            "nbs_resumed_application_initial_page",
-            "nbs_resumed_application_last_save_date"],
-        nbs_app_savings: [
-            "nbs_sav_application_product_type",
-            "nbs_sav_application_id",
-            "nbs_sav_application_starting_date",
-            "nbs_sav_initial_deposit_selected",
-            "nbs_sav_initial_deposit_amt",
-            "nbs_sav_initial_deposit_bank",
-            "nbs_sav_paperless_selected",
-            "nbs_sav_application_continuation",
-            "nbs_sav_econtracting_eligible"],
-        nbs_app_creditcard: [
-            "nbs_cc_application_product_type",
-            "nbs_cc_application_id",
-            "nbs_cc_application_continuation",
-            "nbs_cc_application_starting_date",
-            "nbs_cc_econtracting_eligible",
-            "nbs_cc_internet_banking_setup_completed",
-            "nbs_cc_limit_offered",
-            "nbs_cc_limit_selected",
-            "nbs_cc_decision_interim",
-            "nbs_cc_decision_finalised",
-            "nbs_cc_approval_status", {
-            name: "nbs_cc_balancetxfer",
-            children: [
-                "nbs_cc_bt_amt",
-                "nbs_cc_bt_type"]
-        },
-            "nbs_cc_secondcardholder_selected",
-            "nbs_cc_paperless_selected", {
-            name: "nbs_cc_benefit",
-            children: [
-                "nbs_cc_benefit_name",
-                "nbs_cc_benefit_level",
-                "nbs_cc_benefit_eligible"]
-        },
-            "nbs_cc_directdebit_supplied",
-            "nbs_cc_directdebit_bank",
-            "nbs_cc_directdebit_sortcode"],
-        nbs_app_currentaccount: [
-            "nbs_ca_application_product_type",
-            "nbs_ca_application_id",
-            "nbs_ca_application_starting_date",
-            "nbs_ca_decision_interim",
-            "nbs_ca_decision_finalised",
-            "nbs_ca_initial_deposit_selected",
-            "nbs_ca_initial_deposit_amt",
-            "nbs_ca_initial_deposit_bank",
-            "nbs_ca_paperless_selected", {
-            name: "nbs_ca_benefit",
-            children: [
-                "nbs_ca_benefit_name",
-                "nbs_ca_benefit_level",
-                "nbs_ca_benefit_eligible_app1",
-                "nbs_ca_benefit_eligible_app2"]
-        },
-            "nbs_ca_switch_selected",
-            "nbs_ca_switch_completed",
-            "nbs_ca_upgrade_path",
-            "nbs_ca_econtracting_eligible",
-            "nbs_ca_overdraft_offered",
-            "nbs_ca_overdraft_selected",
-            "nbs_ca_chequebook_requested"],
-        nbs_app_personalloan: [
-            "nbs_pl_application_product_type",
-            "nbs_pl_application_id",
-            "nbs_pl_application_continuation",
-            "nbs_pl_application_starting_date",
-            "nbs_pl_econtracting_eligible",
-            "nbs_pl_internet_banking_setup_completed",
-            "nbs_pl_type",
-            "nbs_pl_subtype",
-            "nbs_pl_loan_amt",
-            "nbs_pl_loan_duration",
-            "nbs_pl_purpose",
-            "nbs_pl_decision_interim",
-            "nbs_pl_decision_finalised",
-            "nbs_pl_approval_status",
-            "nbs_pl_rate_offered"],
-        nbs_error_user: [
-            "nbs_error_description",
-            "nbs_error_text"],
-        nbs_error_system: [
-            "nbs_error_description",
-            "nbs_error_text"],
-        nbs_error_business: [
-            "nbs_error_description",
-            "nbs_error_text"],
-        nbs_user_input: [
-            "nbs_input_name",
-            "nbs_input_validation_status",
-            "nbs_input_validation_message",
-            "nbs_input_value",
-            "nbs_input_pii_flag"],
-        nbs_document_viewed: [
-            "nbs_document_name",
-            "nbs_document_type"],
-        nbs_system_response: [
-            "nbs_system_response_name",
-            "nbs_system_response_text",
-            "nbs_system_response_type"],
-        nbs_element_interaction: [
-            "nbs_interaction_type",
-            "nbs_interaction_label"]
-    }
+	// The full tree is not in the same format as the tree that is used by the code.  The full tree is a object allowing the sub-trees to be
+	// selected by name.  The result of getCopyTemplate() is in-fact an array of objects whose 'name' properties indicate the name of the
+	// node in question; just like the sub-nodes here.  Also array limits and whether elements are expired is in the method, not here.
+	var fullTree = {
+		page:[
+			"nbs_environment",
+			{name:"pageInfo",
+				children:[
+					"pageName",
+					"nbs_page_responsive_state",
+					"nbs_page_responsive_orientation"
+				]
+			},
+			{name:"category",
+				children:[
+					"primaryCategory",
+					"nbs_sub_category_1",
+					"nbs_sub_category_2",
+					"nbs_sub_category_3"
+				]
+			}
+		],
+		nbs_user:[
+			"nbs_user_customer_number",
+			"nbs_user_application_route",
+			"nbs_user_application_route_ibreg",
+			"nbs_user_application_route_ownership",
+			"nbs_user_customer_status",
+			"nbs_user_address_type",
+			"nbs_user_postcode",
+			"nbs_user_bfpo_number",
+			"nbs_user_gender",
+			"nbs_user_dateofbirth",
+			"nbs_user_city",
+			"nbs_user_income",
+			"nbs_journey_id"
+		],
+		nbs_product:[
+			"nbs_product_type"
+		],
+		nbs_product_savings:[
+			"nbs_sav_acc_name",
+			"nbs_sav_acc_category",
+			"nbs_sav_acc_withdrawals",
+			"nbs_sav_offer",
+			"nbs_sav_offer_bonusrate",
+			"nbs_sav_offer_withdrawals",
+			"nbs_sav_fee_annual",
+			"nbs_sav_fee_monthly"
+		],
+		nbs_product_creditcard:[
+			"nbs_cc_name",
+			"nbs_cc_offer",
+			"nbs_cc_offer_bt",
+			"nbs_cc_offer_bt_rate",
+			"nbs_cc_offer_bt_duration",
+			"nbs_cc_offer_purchase",
+			"nbs_cc_offer_purchase_rate",
+			"nbs_cc_offer_purchase_duration",
+			"nbs_cc_fee_annual",
+			"nbs_cc_fee_monthly"
+		],
+		nbs_product_currentaccount:[
+			"nbs_ca_name",
+			"nbs_ca_offer",
+			"nbs_ca_fee_annual",
+			"nbs_ca_fee_monthly"
+		],
+		nbs_product_personalloan:[
+			"nbs_pl_name",
+			"nbs_pl_rate_headline"
+		],
+		nbs_application_module:[
+			"nbs_resumed_application_flag",
+			"nbs_resumed_application_initial_page",
+			"nbs_resumed_application_last_save_date"
+		],
+		nbs_app_savings:[
+			"nbs_sav_application_product_type",
+			"nbs_sav_application_id",
+			"nbs_sav_application_starting_date",
+			"nbs_sav_initial_deposit_selected",
+			"nbs_sav_initial_deposit_amt",
+			"nbs_sav_initial_deposit_bank",
+			"nbs_sav_paperless_selected",
+			"nbs_sav_application_continuation",
+			"nbs_sav_econtracting_eligible"
+		],
+		nbs_app_creditcard:[
+			"nbs_cc_application_product_type",
+			"nbs_cc_application_id",
+			"nbs_cc_application_continuation",
+			"nbs_cc_application_starting_date",
+			"nbs_cc_econtracting_eligible",
+			"nbs_cc_internet_banking_setup_completed",
+			"nbs_cc_limit_offered",
+			"nbs_cc_limit_selected",
+			"nbs_cc_decision_interim",
+			"nbs_cc_decision_finalised",
+			"nbs_cc_approval_status",
+			{name:"nbs_cc_balancetxfer",
+				children:[
+					"nbs_cc_bt_amt",
+					"nbs_cc_bt_type"
+				]
+			},
+			"nbs_cc_secondcardholder_selected",
+			"nbs_cc_paperless_selected",
+			{name:"nbs_cc_benefit",
+				children:[
+					"nbs_cc_benefit_name",
+					"nbs_cc_benefit_level",
+					"nbs_cc_benefit_eligible"
+				]
+			},
+			"nbs_cc_directdebit_supplied",
+			"nbs_cc_directdebit_bank",
+			"nbs_cc_directdebit_sortcode"
+		],
+		nbs_app_currentaccount:[
+			"nbs_ca_application_product_type",
+			"nbs_ca_application_id",
+			"nbs_ca_application_starting_date",
+			"nbs_ca_decision_interim",
+			"nbs_ca_decision_finalised",
+			"nbs_ca_initial_deposit_selected",
+			"nbs_ca_initial_deposit_amt",
+			"nbs_ca_initial_deposit_bank",
+			"nbs_ca_paperless_selected",
+			{name:"nbs_ca_benefit",
+				children:[
+					"nbs_ca_benefit_name",
+					"nbs_ca_benefit_level",
+					"nbs_ca_benefit_eligible_app1",
+					"nbs_ca_benefit_eligible_app2"
+				]
+			},
+			"nbs_ca_switch_selected",
+			"nbs_ca_switch_completed",
+			"nbs_ca_upgrade_path",
+			"nbs_ca_econtracting_eligible",
+			"nbs_ca_overdraft_offered",
+			"nbs_ca_overdraft_selected",
+			"nbs_ca_chequebook_requested"
+		],
+		nbs_app_personalloan:[
+			"nbs_pl_application_product_type",
+			"nbs_pl_application_id",
+			"nbs_pl_application_continuation",
+			"nbs_pl_application_starting_date",
+			"nbs_pl_econtracting_eligible",
+			"nbs_pl_internet_banking_setup_completed",
+			"nbs_pl_type",
+			"nbs_pl_subtype",
+			"nbs_pl_loan_amt",
+			"nbs_pl_loan_duration",
+			"nbs_pl_purpose",
+			"nbs_pl_decision_interim",
+			"nbs_pl_decision_finalised",
+			"nbs_pl_approval_status",
+			"nbs_pl_rate_offered"
+		],
+		nbs_error_user:[
+			"nbs_error_description",
+			"nbs_error_text"
+		],
+		nbs_error_system:[
+			"nbs_error_description",
+			"nbs_error_text"
+		],
+		nbs_error_business:[
+			"nbs_error_description",
+			"nbs_error_text"
+		],
+		nbs_user_input:[
+			"nbs_input_name",
+			"nbs_input_validation_status",
+			"nbs_input_validation_message",
+			"nbs_input_value",
+			"nbs_input_pii_flag"
+		],
+		nbs_document_viewed:[
+			"nbs_document_name",
+			"nbs_document_type"
+		],
+		nbs_system_response:[
+			"nbs_system_response_name",
+			"nbs_system_response_text",
+			"nbs_system_response_type"
+		],
+		nbs_element_interaction:[
+			"nbs_interaction_type",
+			"nbs_interaction_label"
+		]
+	}
+	
+	self = {}
+	self.enable_logging = function () {persist_logging_setting (1)};
+	self.disable_logging = function () {persist_logging_setting (0)};
+	
+	var jsonMissing = false
+	
+	var persist_logging_setting = function (setting)
+	{
+		var e = new Date;
+		e.setTime(e.getTime() + 604800000)
+		document.cookie = "wa_l=" + setting + "; path=/; expires=" + e.toGMTString()
+	};
+	
+	var logging_enabled = function ()
+	{
+	   return (document.cookie+";").indexOf("wa_l=1;")>-1
+	};	
 
-    self = {}
-    self.enable_logging = function () {
-        persist_logging_setting(1)
-    };
-    self.disable_logging = function () {
-        persist_logging_setting(0)
-    };
+	self.view = function () 
+	{
+		if (!window.s || !window.s.t) return
+		clearAAData()
+		
+		// Page Name
+		setPageName()
+		
+		// Products
+		if (window.digitalData && window.digitalData.nbs_product && window.digitalData.nbs_product.nbs_product_type)
+		{
+			s.products = ""
+			if (digitalData.nbs_product_savings)
+				s.products = s.products + ";" + digitalData.nbs_product_savings.nbs_sav_acc_name + " (" + digitalData.nbs_product_savings.nbs_sav_acc_category + ")"
+			else if (digitalData.nbs_product_currentaccount)
+				s.products = s.products + ";" + digitalData.nbs_product_currentaccount.nbs_ca_name + " (" + digitalData.nbs_product_currentaccount.nbs_ca_category + ")"
+			else if (digitalData.nbs_product_creditcard)
+				s.products = s.products + ";" + digitalData.nbs_product_creditcard.nbs_cc_name + " (" + digitalData.nbs_product_creditcard.nbs_cc_category + ")"
+			
+		}
+		
+		// Context Data
+		setContextData("nbs_page")
+		s.t()
+	}
 
-    var jsonMissing = false
+	self.action = function (eventName) 
+	{
+		if (!window.s || !window.s.tl) return
+		clearAAData()
+		setPageName()
+		message = ""
+		s.linkTrackVars = ""
+			
+		if (eventName=="")
+			send_error ("ddl_action_error:[blank]")
+		else if (eventName!="nbs_page" && setContextData(eventName))
+		{
+			message = eventName
+		}
+		else
+		{
+			send_error ("ddl_action_error:" + eventName)
+			return
+		}
+		
+		if (confirmAction(eventName))
+		{
+			s.linkTrackVars+=",pageName"
+			s.tl(true, "o", message)
+			s.linkTrackVars="None"
+		}	
+	}
 
-    var persist_logging_setting = function (setting) {
-        var e = new Date;
-        e.setTime(e.getTime() + 604800000)
-        document.cookie = "wa_l=" + setting + "; path=/; expires=" + e.toGMTString()
-    };
+	var confirmAction = function (actionName)
+	{
+		var result = true
+		var actionName = actionName.toLowerCase()
+		if (typeof window.wa_action_whitelist == "object" && typeof window.wa_action_whitelist.length == "number" && window.wa_action_whitelist.length>0)
+		{
+			result = false
+			for (var i=0, j=window.wa_action_whitelist.length; i<j; i++)
+			{
+				if (window.wa_action_whitelist[i].toLowerCase()==actionName)
+				{
+					result = true;
+					break;
+				}
+			}
+		}
+		if (typeof window.wa_action_blacklist == "object" && typeof window.wa_action_blacklist.length == "number")
+		{
+			for (var i=0, j=window.wa_action_blacklist.length; i<j; i++)
+			{
+				if (window.wa_action_blacklist[i].toLowerCase()==actionName)
+				{
+					result = false;
+					break;
+				}
+			}
+		}
+		return result
+	}
+	
+	var setPageName = function ()
+	{
+		if (window.digitalData && window.digitalData.page && window.digitalData.page.pageInfo)
+			s.pageName=window.digitalData.page.pageInfo.pageName
+	}
 
-    var logging_enabled = function () {
-        return (document.cookie + ";").indexOf("wa_l=1;") > -1
-    };
+	var send_error = function (message)
+	{
+		s.linkTrackVars="pageName"
+		s.tl(true, "o", message)
+		s.linkTrackVars="None"
+	}
 
-    self.view = function () {
-        if (!window.s || !window.s.t) return
-        clearAAData()
+	self.ddl_backup = function () 
+	{
+		if (typeof window.digitalData == "object")
+		{
+			if (typeof JSON.parse == "function")
+				window.backup_digitalData = JSON.parse(JSON.stringify(window.digitalData));
+			else
+				jsonMissing = true
+		}
+		else
+		{
+			window.setPageName()
+			window.send_error ("Object not found: digitalData")
+		}
+	}
 
-        // Page Name
-        setPageName()
+	self.ddl_restore = function () 
+	{
+		if (typeof window.backup_digitalData == "object")
+		{
+			window.digitalData = window.backup_digitalData
+			window.backup_digitalData=null
+		}
+		else if (jsonMissing)
+		{
+			window.send_error ("Object not found due to old browser: backup_digitalData")
+		}
+		else		
+		{
+			setPageName()
+			send_error ("Object not found: backup_digitalData")
+		}
+	}
 
-        // Products
-        if (window.digitalData && window.digitalData.nbs_product && window.digitalData.nbs_product.nbs_product_type) {
-            s.products = ""
-            if (digitalData.nbs_product_savings) s.products = s.products + ";" + digitalData.nbs_product_savings.nbs_sav_acc_name + " (" + digitalData.nbs_product_savings.nbs_sav_acc_category + ")"
-            else if (digitalData.nbs_product_currentaccount) s.products = s.products + ";" + digitalData.nbs_product_currentaccount.nbs_ca_name + " (" + digitalData.nbs_product_currentaccount.nbs_ca_category + ")"
-            else if (digitalData.nbs_product_creditcard) s.products = s.products + ";" + digitalData.nbs_product_creditcard.nbs_cc_name + " (" + digitalData.nbs_product_creditcard.nbs_cc_category + ")"
+	var clearAAData = function ()
+	{
+		s.pageName = ""
+		s.channel=""
+		s.server=""
+		s.products = ""
+		for (var i=1; i<4; i++)
+		{
+			s["hier"+i]=""
+			s["list"+i]=""
+			s["prop"+i]=""
+			s["eVar"+i]=""
+		}
+		for (var i=4; i<200; i++)
+		{
+			s["prop"+i]=""
+			s["eVar"+i]=""
+		}
+		s.events=""
+		s.contextData={}
+	}
 
-        }
+	var setContextData = function (rule)
+	{
+		if (typeof window.digitalData != "object") return;
+		var template = getCopyTemplate(rule)
+		if (!template) return false
+		setContextDataRecursive (0, template, window.digitalData, "");
+		
+		if (logging_enabled() && console && typeof console.log == "function")
+		{
+			console.log("Log of DDL (parsed):")
+			console.log("{")
+			for (var variable in s.contextData)
+			{
+				if (s.contextData.hasOwnProperty(variable))
+				{
+					console.log ("          \"" + variable + "\": \"" + s.contextData[variable] + "\",")
+				}
+			}
+			console.log("}")
+		}
+		return true
+	}
 
-        // Context Data
-        setContextData("nbs_page")
-        s.t()
-    }
+	var setContextDataRecursive = function (depth, parentTemplate, parentDigitalData, parentContextDataPath)
+	{
+		if (depth>3) return
+		
+		for (var i=0, j=parentTemplate.length; i<j; i++)
+		{
+			var fieldTemplate = parentTemplate[i];
+			if (typeof fieldTemplate == "string")
+			{
+				var fieldDigitalData = parentDigitalData[fieldTemplate]
+				if (typeof fieldDigitalData != "undefined")
+				{
+					var path = parentContextDataPath + (parentContextDataPath!=""?".":"") + fieldTemplate
+					s.contextData[path]=fieldDigitalData
+					s.linkTrackVars+=",contextData." + path
+				}
+			} // Process leaf nodes (strings)
+			else
+			{
+				var fieldName = fieldTemplate.name;
+				var path = parentContextDataPath + (parentContextDataPath!=""?".":"") + fieldName
+				var fieldDigitalData = parentDigitalData[fieldName]
+				if (typeof fieldDigitalData != "undefined")
+				{
+					if (typeof fieldDigitalData.length == "number")
+					{
+						var arrayLimit = 1
+						var isExpirable = true
+						if (fieldTemplate.arrayLimit) arrayLimit = fieldTemplate.arrayLimit
+						if (fieldTemplate.isExpirable) isExpirable = fieldTemplate.isExpirable
+						for (var k = 0, l = fieldDigitalData.length; k < l; k++)
+						{
+							if (!isExpirable || (k<arrayLimit && typeof fieldDigitalData[k].nbs_sc_expired == "undefined"))
+								setContextDataRecursive (depth + 1, fieldTemplate.children, fieldDigitalData[k], path + "_" + k)
+							if (isExpirable) fieldDigitalData[k].nbs_sc_expired = 1
+						}
+					} // Process arrays
+					else
+					{
+						setContextDataRecursive (depth + 1, fieldTemplate.children, fieldDigitalData, path)
+					} // Process navigation down heirarchy
+				} // Check node exists in data layer
+			} // Process arrays and child nodes
+		} // Loop through current list of nodes
+	} // End recusive function
 
-    self.action = function (eventName) {
-        if (!window.s || !window.s.tl) return
-        clearAAData()
-        setPageName()
-        message = ""
-
-        if (eventName == "") send_error("ddl_action_error:[blank]")
-        else if (eventName == "user_input_complete" || eventName == "document_viewed" || eventName == "system_response" || eventName == "misc_interaction") {
-            s.linkTrackVars = ""
-            setContextData(eventName)
-            message = eventName
-        } else {
-            send_error("ddl_action_error:" + eventName)
-            return
-        }
-
-        if (confirmAction(eventName)) {
-            s.linkTrackVars += ",pageName"
-            s.tl(true, "o", message)
-            s.linkTrackVars = "None"
-        }
-    }
-
-    var confirmAction = function (actionName) {
-        var result = true
-        var actionName = actionName.toLowerCase()
-        if (typeof window.wa_action_whitelist == "object" && typeof window.wa_action_whitelist.length == "number" && window.wa_action_whitelist.length > 0) {
-            result = false
-            for (var i = 0, j = window.wa_action_whitelist.length; i < j; i++) {
-                if (window.wa_action_whitelist[i].toLowerCase() == actionName) {
-                    result = true;
-                    break;
-                }
-            }
-        }
-        if (typeof window.wa_action_blacklist == "object" && typeof window.wa_action_blacklist.length == "number") {
-            for (var i = 0, j = window.wa_action_blacklist.length; i < j; i++) {
-                if (window.wa_action_blacklist[i].toLowerCase() == actionName) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        return result
-    }
-
-    var setPageName = function () {
-        if (window.digitalData && window.digitalData.page && window.digitalData.page.pageInfo) s.pageName = window.digitalData.page.pageInfo.pageName
-    }
-
-    var send_error = function (message) {
-        s.linkTrackVars = "pageName"
-        s.tl(true, "o", message)
-        s.linkTrackVars = "None"
-    }
-
-    self.ddl_backup = function () {
-        if (typeof window.digitalData == "object") {
-            if (typeof JSON.parse == "function") window.backup_digitalData = JSON.parse(JSON.stringify(window.digitalData));
-            else jsonMissing = true
-        } else {
-            window.setPageName()
-            window.send_error("Object not found: digitalData")
-        }
-    }
-
-    self.ddl_restore = function () {
-        if (typeof window.backup_digitalData == "object") {
-            window.digitalData = window.backup_digitalData
-            window.backup_digitalData = null
-        } else if (jsonMissing) {
-            window.send_error("Object not found due to old browser: backup_digitalData")
-        } else {
-            setPageName()
-            send_error("Object not found: backup_digitalData")
-        }
-    }
-
-    var clearAAData = function () {
-        s.pageName = ""
-        s.channel = ""
-        s.server = ""
-        s.products = ""
-        for (var i = 1; i < 4; i++) {
-            s["hier" + i] = ""
-            s["list" + i] = ""
-            s["prop" + i] = ""
-            s["eVar" + i] = ""
-        }
-        for (var i = 4; i < 200; i++) {
-            s["prop" + i] = ""
-            s["eVar" + i] = ""
-        }
-        s.events = ""
-        s.contextData = {}
-    }
-
-    var setContextData = function (rule) {
-        if (typeof window.digitalData != "object") return;
-        var template = getCopyTemplate(rule)
-        setContextDataRecursive(0, template, window.digitalData, "");
-
-        if (logging_enabled() && console && typeof console.log == "function") {
-            console.log("Log of DDL (parsed):")
-            console.log("{")
-            for (var variable in s.contextData) {
-                if (s.contextData.hasOwnProperty(variable)) {
-                    console.log("          \"" + variable + "\": \"" + s.contextData[variable] + "\",")
-                }
-            }
-            console.log("}")
-        }
-    }
-
-    var setContextDataRecursive = function (depth, parentTemplate, parentDigitalData, parentContextDataPath) {
-        if (depth > 3) return
-
-        for (var i = 0, j = parentTemplate.length; i < j; i++) {
-            var fieldTemplate = parentTemplate[i];
-            if (typeof fieldTemplate == "string") {
-                var fieldDigitalData = parentDigitalData[fieldTemplate]
-                if (typeof fieldDigitalData != "undefined") {
-                    var path = parentContextDataPath + (parentContextDataPath != "" ? "." : "") + fieldTemplate
-                    s.contextData[path] = fieldDigitalData
-                    s.linkTrackVars += ",contextData." + path
-                }
-            } // Process leaf nodes (strings)
-            else {
-                var fieldName = fieldTemplate.name;
-                var path = parentContextDataPath + (parentContextDataPath != "" ? "." : "") + fieldName
-                var fieldDigitalData = parentDigitalData[fieldName]
-                if (typeof fieldDigitalData != "undefined") {
-                    if (typeof fieldDigitalData.length == "number") {
-                        var arrayLimit = 1
-                        var isExpirable = true
-                        if (fieldTemplate.arrayLimit) arrayLimit = fieldTemplate.arrayLimit
-                        if (fieldTemplate.isExpirable) arrayLimit = fieldTemplate.isExpirable
-                        for (var k = 0, l = fieldDigitalData.length; k < l; k++) {
-                            if (!isExpirable || (k < arrayLimit && typeof fieldDigitalData[k].nbs_sc_expired == "undefined")) setContextDataRecursive(depth + 1, fieldTemplate.children, fieldDigitalData[k], path + "_" + k)
-                            if (isExpirable) fieldDigitalData[k].nbs_sc_expired = 1
-                        }
-                    } // Process arrays
-                    else {
-                        setContextDataRecursive(depth + 1, fieldTemplate.children, fieldDigitalData, path)
-                    } // Process navigation down heirarchy
-                } // Check node exists in data layer
-            } // Process arrays and child nodes
-        } // Loop through current list of nodes
-    } // End recusive function
-
-    var getCopyTemplate = function (rule) {
-        var common = [{
-            name: "page",
-            children: fullTree.page
-        }]
-        if (rule == "nbs_page") {
-            return common.concat([{
-                name: "nbs_user",
-                children: fullTree.nbs_user
-            }, {
-                name: "nbs_product",
-                children: fullTree.nbs_product
-            }, {
-                name: "nbs_product_savings",
-                children: fullTree.nbs_product_savings
-            }, {
-                name: "nbs_product_creditcard",
-                children: fullTree.nbs_product_creditcard
-            }, {
-                name: "nbs_product_currentaccount",
-                children: fullTree.nbs_product_currentaccount
-            }, {
-                name: "nbs_product_personalloan",
-                children: fullTree.nbs_product_personalloan
-            }, {
-                name: "nbs_application_module",
-                children: fullTree.nbs_application_module
-            }, {
-                name: "nbs_app_savings",
-                children: fullTree.nbs_app_savings
-            }, {
-                name: "nbs_app_creditcard",
-                children: fullTree.nbs_app_creditcard
-            }, {
-                name: "nbs_app_currentaccount",
-                children: fullTree.nbs_app_currentaccount
-            }, {
-                name: "nbs_app_personalloan",
-                children: fullTree.nbs_app_personalloan
-            }, {
-                name: "nbs_error_user",
-                children: fullTree.nbs_error_user,
-                arrayLimit: 10
-            }, {
-                name: "nbs_error_business",
-                children: fullTree.nbs_error_business,
-                arrayLimit: 10
-            }, {
-                name: "nbs_error_system",
-                children: fullTree.nbs_error_system,
-                arrayLimit: 10
-            }])
-        }
-        if (rule == "user_input_complete") return common.concat([{
-            name: "nbs_user_input",
-            children: fullTree.nbs_user_input
-        }])
-        if (rule == "document_viewed") return common.concat([{
-            name: "nbs_document_viewed",
-            children: fullTree.nbs_document_viewed
-        }])
-        if (rule == "system_response") return common.concat([{
-            name: "nbs_system_response",
-            children: fullTree.nbs_system_response
-        }])
-        if (rule == "misc_interaction") return common.concat([{
-            name: "nbs_element_interaction",
-            children: fullTree.nbs_element_interaction
-        }])
-    }
-
-    return self;
+	var getCopyTemplate = function (rule)
+	{	
+		var common = [
+				{name:"page", children:fullTree.page}
+		]		
+		if (rule=="nbs_page")
+		{
+			return common.concat([
+				{name:"nbs_user",                   children:fullTree.nbs_user},
+				{name:"nbs_product",                children:fullTree.nbs_product},
+				{name:"nbs_product_savings",        children:fullTree.nbs_product_savings},
+				{name:"nbs_product_creditcard",     children:fullTree.nbs_product_creditcard},
+				{name:"nbs_product_currentaccount", children:fullTree.nbs_product_currentaccount},
+				{name:"nbs_product_personalloan",   children:fullTree.nbs_product_personalloan},
+				{name:"nbs_application_module",     children:fullTree.nbs_application_module},
+				{name:"nbs_app_savings",            children:fullTree.nbs_app_savings},
+				{name:"nbs_app_creditcard",         children:fullTree.nbs_app_creditcard},
+				{name:"nbs_app_currentaccount",     children:fullTree.nbs_app_currentaccount},
+				{name:"nbs_app_personalloan",       children:fullTree.nbs_app_personalloan},
+				{name:"nbs_error_user",             children:fullTree.nbs_error_user,      arrayLimit:10},
+				{name:"nbs_error_business",         children:fullTree.nbs_error_business,  arrayLimit:10},
+				{name:"nbs_error_system",           children:fullTree.nbs_error_system,    arrayLimit:10}			
+			])
+		}
+		if (rule=="user_input_complete") return common.concat([{name:"nbs_user_input",          children:fullTree.nbs_user_input}])
+		if (rule=="document_viewed")     return common.concat([{name:"nbs_document_viewed",     children:fullTree.nbs_document_viewed}])
+		if (rule=="system_response")     return common.concat([{name:"nbs_system_response",     children:fullTree.nbs_system_response}])
+		if (rule=="misc_interaction")    return common.concat([{name:"nbs_element_interaction", children:fullTree.nbs_element_interaction}])
+		return null
+	}
+	
+	return self;
 }());
 window.wa_view = wa_component.view
 window.wa_action = wa_component.action
@@ -659,6 +693,7 @@ window.wa_enable_logging = wa_component.enable_logging
 window.wa_disable_logging = wa_component.disable_logging
 window.ddl_backup = wa_component.ddl_backup
 window.ddl_restore = wa_component.ddl_restore
+
 
 
 /*
