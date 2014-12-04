@@ -414,7 +414,7 @@ window.wa_component = (function () {
 		]
 	}
 	
-	self = {}
+	var self = {}
 	self.enable_logging = function () {persist_logging_setting (1)};
 	self.disable_logging = function () {persist_logging_setting (0)};
 	
