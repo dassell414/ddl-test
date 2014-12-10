@@ -9,7 +9,7 @@ s.linkTrackVars = "None";
 s.linkTrackEvents = "None";
 
 //An internal version number signifying which internal customised version of the code is being used.  This should change every time a new js file is deployed.  
-s.appMeasurementVersion = "1.2.1_20141204_001";
+s.appMeasurementVersion = "1.2.1_20141210_001";
 
 s.cookieDomainPeriods = "3";
 s.fpCookieDomainPeriods = "3";
@@ -208,10 +208,7 @@ s.getPreviousValue = new Function("v", "c", "el", "" + "var s=this,t=new Date,i,
 s.apl = new Function("l", "v", "d", "u", "var s=this,m=0;if(!l)l='';if(u){var i,n,a=s.split(l,d);for(i=0;i<a.length;i++){n=a[i];m=m||(u==1?(n==v):(n.toLowerCase()==v.toLowerCase()));}}if(!m)l=l?l+d+v:v;return l");
 
 //	DDL STUFF
-//	version: 0.1.1
-// TODO how to implement forced link tracking.  is this 'this'?
-
-
+//	version: 0.1.2
 //window.wa_action_whitelist = ["document_viewed"]
 //window.wa_action_blacklist = ["user_input_complete"]
 
@@ -411,12 +408,17 @@ window.wa_component = (function () {
 		nbs_element_interaction:[
 			"nbs_interaction_type",
 			"nbs_interaction_label"
+		],
+		nbs_navigation:[
+			"nbs_navigation_type",
+			"nbs_navigation_title",
+			"nbs_navigation_label"
 		]
 	}
 	
-	self = {}
-	self.enable_logging = function () {persist_logging_setting (1)};
-	self.disable_logging = function () {persist_logging_setting (0)};
+	publicInterface = {}
+	publicInterface.enable_logging = function () {persist_logging_setting (1)};
+	publicInterface.disable_logging = function () {persist_logging_setting (0)};
 	
 	var jsonMissing = false
 	
@@ -432,7 +434,7 @@ window.wa_component = (function () {
 	   return (document.cookie+";").indexOf("wa_l=1;")>-1
 	};	
 
-	self.view = function () 
+	publicInterface.view = function () 
 	{
 		if (!window.s || !window.s.t) return
 		clearAAData()
@@ -458,7 +460,7 @@ window.wa_component = (function () {
 		s.t()
 	}
 
-	self.action = function (eventName) 
+	publicInterface.action = function (eventName, anchor) 
 	{
 		if (!window.s || !window.s.tl) return
 		clearAAData()
@@ -466,22 +468,22 @@ window.wa_component = (function () {
 		message = ""
 		s.linkTrackVars = ""
 			
-		if (eventName=="")
-			send_error ("ddl_action_error:[blank]")
+		if (typeof eventName == "undefined" || eventName=="")
+			send_error ("ddl_action_error:[blank]", anchor)
 		else if (eventName!="nbs_page" && setContextData(eventName))
 		{
 			message = eventName
 		}
 		else
 		{
-			send_error ("ddl_action_error:" + eventName)
+			send_error ("ddl_action_error:" + eventName, anchor)
 			return
 		}
 		
 		if (confirmAction(eventName))
 		{
 			s.linkTrackVars+=",pageName"
-			s.tl(true, "o", message)
+			callSTl (eventName, message, anchor)
 			s.linkTrackVars="None"
 		}	
 	}
@@ -522,14 +524,29 @@ window.wa_component = (function () {
 			s.pageName=window.digitalData.page.pageInfo.pageName
 	}
 
-	var send_error = function (message)
+	var send_error = function (message, anchor)
 	{
 		s.linkTrackVars="pageName"
-		s.tl(true, "o", message)
+		callSTl ("nbs_error", message, anchor)
 		s.linkTrackVars="None"
 	}
+	
+	var callSTl = function (eventName, message, anchor)
+	{
+		var pauseLinkTrack = typeof anchor != "undefined" && typeof anchor.href != "undefined" && anchor.href != ""
+		if (pauseLinkTrack)
+		{
+			// See if forced link tracking is required
+			if (confirmForceLinkTrack(eventName))
+				s.tl(anchor, "o", message, null, 'navigate')
+			else
+				s.tl(anchor, "o", message)
+		}				
+		else
+			s.tl(true, "o", message)
+	}
 
-	self.ddl_backup = function () 
+	publicInterface.ddl_backup = function () 
 	{
 		if (typeof window.digitalData == "object")
 		{
@@ -545,7 +562,7 @@ window.wa_component = (function () {
 		}
 	}
 
-	self.ddl_restore = function () 
+	publicInterface.ddl_restore = function () 
 	{
 		if (typeof window.backup_digitalData == "object")
 		{
@@ -682,10 +699,17 @@ window.wa_component = (function () {
 		if (rule=="document_viewed")     return common.concat([{name:"nbs_document_viewed",     children:fullTree.nbs_document_viewed}])
 		if (rule=="system_response")     return common.concat([{name:"nbs_system_response",     children:fullTree.nbs_system_response}])
 		if (rule=="misc_interaction")    return common.concat([{name:"nbs_element_interaction", children:fullTree.nbs_element_interaction}])
+		if (rule=="nav_tracking")        return common.concat([{name:"nbs_navigation",          children:fullTree.nbs_navigation}])
 		return null
 	}
+
+	var confirmForceLinkTrack = function (eventName)
+	{
+		if (eventName=="nav_tracking") return true
+		return false
+	}
 	
-	return self;
+	return publicInterface;
 }());
 window.wa_view = wa_component.view
 window.wa_action = wa_component.action
@@ -693,7 +717,6 @@ window.wa_enable_logging = wa_component.enable_logging
 window.wa_disable_logging = wa_component.disable_logging
 window.ddl_backup = wa_component.ddl_backup
 window.ddl_restore = wa_component.ddl_restore
-
 
 
 /*
