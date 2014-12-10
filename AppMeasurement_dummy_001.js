@@ -9,7 +9,7 @@ s.linkTrackVars = "None";
 s.linkTrackEvents = "None";
 
 //An internal version number signifying which internal customised version of the code is being used.  This should change every time a new js file is deployed.  
-s.appMeasurementVersion = "1.2.1_20141210_004";
+s.appMeasurementVersion = "1.2.1_20141210_005";
 
 s.cookieDomainPeriods = "3";
 s.fpCookieDomainPeriods = "3";
@@ -210,7 +210,7 @@ s.apl = new Function("l", "v", "d", "u", "var s=this,m=0;if(!l)l='';if(u){var i,
 //	DDL STUFF
 //	version: 0.1.2
 window.wa_action_whitelist = ["misc_interaction"]
-window.wa_action_blacklist = ["user_input_complete"]
+window.wa_action_blacklist = ["misc_interaction"]
 
 
 window.wa_component = (function () {
