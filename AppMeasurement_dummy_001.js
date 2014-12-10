@@ -491,7 +491,7 @@ window.wa_component = (function () {
 	var confirmAction = function (actionName)
 	{
 		var result = true
-		var actionName = actionName.toLowerCase()
+		var actionName = actionName.toLowerCase() || '[blank]'
 		if (typeof window.wa_action_whitelist == "object" && typeof window.wa_action_whitelist.length == "number" && window.wa_action_whitelist.length>0)
 		{
 			result = false
