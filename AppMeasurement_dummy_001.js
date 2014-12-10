@@ -209,8 +209,8 @@ s.apl = new Function("l", "v", "d", "u", "var s=this,m=0;if(!l)l='';if(u){var i,
 
 //	DDL STUFF
 //	version: 0.1.2
-//window.wa_action_whitelist = ["document_viewed"]
-window.wa_action_blacklist = ["user_input_complete"]
+window.wa_action_whitelist = ["misc_interaction"]
+//window.wa_action_blacklist = ["user_input_complete"]
 
 
 window.wa_component = (function () {
