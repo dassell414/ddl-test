@@ -193,7 +193,11 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager', 'aspnetForm',
             <div id="NavigationPanel" class="yournationwide">
 	
 			    <div id="nbs-logo" >
-				    <a href="#" onclick="digitalData.nbs_element_interaction={nbs_interaction_type:'Navigation',nbs_interaction_label:'Top of Page'};               wa_action('misc_interaction')"><h1>'misc_interaction' in action - click here!</h1></a>
+				    <a href="#" onclick="digitalData.nbs_element_interaction={nbs_interaction_type:'Navigation',nbs_interaction_label:'Top of Page'};               wa_action('misc_interaction', this)"><h1>'misc_interaction' (with 'this' argument) in action - click here!</h1></a>
+				    
+			    </div>
+			    <div id="nbs-logo" >
+				    <a href="#" onclick="digitalData.nbs_element_interaction={nbs_interaction_type:'Navigation',nbs_interaction_label:'Top of Page'};               wa_action('misc_interaction')"><h1>'misc_interaction' (without 'this' argument) in action - click here!</h1></a>
 				    
 			    </div>
 			    <div id="nbs-logo" >
@@ -205,7 +209,15 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager', 'aspnetForm',
 				    
 			    </div>
 			    <div id="nbs-logo" >
-				    <a href="#" onclick="digitalData.nbs_element_interaction={nbs_interaction_type:'Navigation',nbs_interaction_label:'Top of Page'};               wa_action()"><h1>[blank] in action - click here!</h1></a>
+				    <a href="#" onclick="digitalData.nbs_element_interaction={nbs_interaction_type:'Navigation',nbs_interaction_label:'Top of Page'};               wa_action('nav_tracking', this)"><h1>[blank] in action - click here!</h1></a>
+				    
+			    </div>
+			    <div id="nbs-logo" >
+				    <a href="http://nwat-b.github.io/ddl-test/dummy_002.htm?test_cid=test02" onclick="digitalData.nbs_navigation={nbs_navigation_type:'callout',nbs_navigation_title:'test nav tracking',nbs_navigation_label:'Next Page'};               wa_action('nav_tracking', this)"><h1>'nav_tracking' (with 'this' argument) in action - click here!</h1></a>
+				    
+			    </div>
+			    <div id="nbs-logo" >
+				    <a href="http://nwat-b.github.io/ddl-test/dummy_002.htm?test_cid=test02" onclick="digitalData.nbs_navigation={nbs_navigation_type:'callout',nbs_navigation_title:'test nav tracking',nbs_navigation_label:'Next Page'};               wa_action('nav_tracking')"><h1>'nav_tracking' (without 'this' argument) in action - click here!</h1></a>
 				    
 			    </div>
                 <ul id="nav-list">
