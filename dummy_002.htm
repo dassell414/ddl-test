@@ -221,7 +221,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager', 'aspnetForm',
 				    
 			    </div>
 			    <form name="ddlTest" onSubmit="ddlAction(); return false">
-Event Name (used for 'eventName' argument): <input type="text" name="eventName"><br>
+Event Name (used for 'eventName' argument): <input type="text" name="eventName" onblur="digitalData.nbs_user_input={nbs_input_name:'event name',nbs_input_validation_status:'passed'};               wa_action('user_input_complete')"><br>
 User Input Name: <input type="text" name="inputValue"><br>
 <input type="submit" value="Test link-tracking">
 </form> 
