@@ -220,6 +220,11 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager', 'aspnetForm',
 				    <a href="http://nwat-b.github.io/ddl-test/dummy_002.htm?test_cid=test02" onclick="digitalData.nbs_navigation={nbs_navigation_type:'callout',nbs_navigation_title:'test nav tracking',nbs_navigation_label:'Next Page'};               wa_action('nav_tracking')"><h1>'nav_tracking' (without 'this' argument) in action - click here!</h1></a>
 				    
 			    </div>
+			    <form name="ddlTest" onSubmit="ddlAction(); return false">
+Event Name (used for 'eventName' argument): <input type="text" name="eventName"><br>
+User Input Name: <input type="text" name="inputValue"><br>
+<input type="submit" value="Test link-tracking">
+</form> 
                 <ul id="nav-list">
 		            <li id="yournationwide"><a href="/">Your Nationwide home</a></li> 		
                             
